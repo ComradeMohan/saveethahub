@@ -1,5 +1,6 @@
 import React from 'react';
 import { GraduationCap, BookOpen, Award, Calendar } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 const Hero = () => {
   return (
@@ -37,32 +38,37 @@ const Hero = () => {
                 {
                   icon: GraduationCap,
                   title: 'Academic Tools',
-                  desc: 'CGPA & Attendance Calculators'
+                  desc: 'CGPA & Attendance Calculators',
+                  path: '/academics' // Path for Academic Tools
                 },
                 {
                   icon: BookOpen,
                   title: 'Learning Resources',
-                  desc: 'Interactive Concept Maps'
+                  desc: 'Interactive Concept Maps',
+                  path: '/concept-maps' // Path for Learning Resources
                 },
                 {
                   icon: Award,
                   title: 'Skill Development',
-                  desc: 'Free Certifications'
+                  desc: 'Free Certifications',
+                  path: '/skills' // Path for Skill Development
                 },
                 {
                   icon: Calendar,
                   title: 'Events',
-                  desc: 'Stay Updated with Activities'
+                  desc: 'Stay Updated with Activities',
+                  path: '/events' // Path for Events
                 }
               ].map((item, index) => (
-                <div
+                <Link // Wrap each item in a Link for navigation
                   key={index}
+                  to={item.path} // Set the destination path here
                   className="p-6 bg-white/10 backdrop-blur-lg rounded-xl hover:transform hover:-translate-y-1 transition-all duration-300"
                 >
                   <item.icon className="h-8 w-8 text-teal-400 mb-4" />
                   <h3 className="text-lg font-semibold text-white mb-2">{item.title}</h3>
                   <p className="text-white/70 text-sm">{item.desc}</p>
-                </div>
+                </Link>
               ))}
             </div>
           </div>
