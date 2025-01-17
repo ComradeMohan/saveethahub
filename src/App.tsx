@@ -1,3 +1,5 @@
+// src/App.tsx
+
 import React, { useState } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { 
@@ -6,11 +8,12 @@ import {
   Calendar, 
   Clock, 
   Compass, 
-  // GraduationCap, 
   Award, 
   MessageSquare,
-  LogInIcon
+  LogInIcon,
+  UserIcon
 } from 'lucide-react';
+
 import Navbar from './components/Navbar';
 import HomePage from './pages/HomePage';
 import AcademicsPage from './pages/AcademicsPage';
@@ -23,19 +26,23 @@ import EventsPage from './pages/EventsPage';
 import ContactPage from './pages/ContactPage';
 import LoginPage from './pages/LoginPage';
 
-function App() {
+const App: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [user, setUser] = useState<{ username: string } | null>(null); // Manage user state
 
   const navItems = [
     { title: 'Academics', icon: BookOpen, path: '/academics' },
     { title: 'CGPA Calculator', icon: Calculator, path: '/cgpa-calculator' },
     { title: 'Attendance', icon: Clock, path: '/attendance' },
     { title: 'Concept Maps', icon: Compass, path: '/concept-maps' },
-    // { title: ' Skills', icon: GraduationCap, path: '/skills' },
     { title: 'Certifications', icon: Award, path: '/certifications' },
     { title: 'Events', icon: Calendar, path: '/events' },
     { title: 'Contact', icon: MessageSquare, path: '/contact' },
-    { title: 'Login', icon: LogInIcon, path: '/login' },
+    {
+      title: user ? user.username : 'Login',
+      icon: user ? UserIcon : LogInIcon,
+      path: '/login',
+    },
   ];
 
   return (
@@ -53,7 +60,7 @@ function App() {
             <Route path="/certifications" element={<CertificationsPage />} />
             <Route path="/events" element={<EventsPage />} />
             <Route path="/contact" element={<ContactPage />} />
-            <Route path='/login' element={<LoginPage/>}/>
+            <Route path="/login" element={<LoginPage setUser={setUser} />} /> {/* Pass setUser to LoginPage */}
           </Routes>
         </main>
       </div>
