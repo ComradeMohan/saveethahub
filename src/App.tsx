@@ -1,14 +1,12 @@
-// src/App.tsx
-
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import { 
-  BookOpen, 
-  Calculator, 
-  Calendar, 
-  Clock, 
-  Compass, 
-  Award, 
+import {
+  BookOpen,
+  Calculator,
+  Calendar,
+  Clock,
+  Compass,
+  Award,
   MessageSquare,
   LogInIcon,
   UserIcon
@@ -28,7 +26,24 @@ import LoginPage from './pages/LoginPage';
 
 const App: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [user, setUser] = useState<{ username: string } | null>(null); // Manage user state
+  const [user, setUser] = useState<{ username: string; email?: string } | null>(null);
+
+  // Check localStorage for existing user data
+  useEffect(() => {
+    const storedUser = localStorage.getItem('user');
+    if (storedUser) {
+      setUser(JSON.parse(storedUser));
+    }
+  }, []);
+
+  // Update localStorage whenever user state changes
+  useEffect(() => {
+    if (user) {
+      localStorage.setItem('user', JSON.stringify(user));
+    } else {
+      localStorage.removeItem('user');
+    }
+  }, [user]);
 
   const navItems = [
     { title: 'Academics', icon: BookOpen, path: '/academics' },
