@@ -6,9 +6,10 @@ import {
   Calendar, 
   Clock, 
   Compass, 
-  GraduationCap, 
+  // GraduationCap, 
   Award, 
-  MessageSquare
+  MessageSquare,
+  LogInIcon
 } from 'lucide-react';
 import Navbar from './components/Navbar';
 import HomePage from './pages/HomePage';
@@ -20,6 +21,7 @@ import SkillsPage from './pages/SkillsPage';
 import CertificationsPage from './pages/CertificationsPage';
 import EventsPage from './pages/EventsPage';
 import ContactPage from './pages/ContactPage';
+import LoginPage from './pages/LoginPage';
 
 function App() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -29,10 +31,11 @@ function App() {
     { title: 'CGPA Calculator', icon: Calculator, path: '/cgpa-calculator' },
     { title: 'Attendance', icon: Clock, path: '/attendance' },
     { title: 'Concept Maps', icon: Compass, path: '/concept-maps' },
-    { title: 'Learn Skills', icon: GraduationCap, path: '/skills' },
+    // { title: ' Skills', icon: GraduationCap, path: '/skills' },
     { title: 'Certifications', icon: Award, path: '/certifications' },
     { title: 'Events', icon: Calendar, path: '/events' },
     { title: 'Contact', icon: MessageSquare, path: '/contact' },
+    { title: 'Login', icon: LogInIcon, path: '/login' },
   ];
 
   return (
@@ -50,6 +53,7 @@ function App() {
             <Route path="/certifications" element={<CertificationsPage />} />
             <Route path="/events" element={<EventsPage />} />
             <Route path="/contact" element={<ContactPage />} />
+            <Route path='/login' element={<LoginPage/>}/>
           </Routes>
         </main>
       </div>
