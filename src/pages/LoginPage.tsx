@@ -9,7 +9,7 @@ interface Props {
 
 const LoginPage: React.FC<Props> = ({ setUser }) => {
     return (
-        <div className="mx-auto mt-24">
+        <div className="mx-auto mt-24 flex justify-center">
             
             <LoginForm setUser={setUser} />
         </div>
