@@ -6,10 +6,11 @@ import {
     Calendar,
     Clock,
     Compass,
-    Gitlab,
+    
     MessageSquare,
     LogInIcon,
-    UserIcon
+    UserIcon,
+    Gitlab
 } from 'lucide-react';
 
 import Navbar from './components/Navbar';
@@ -58,7 +59,7 @@ const App: React.FC = () => {
         { title: 'CGPA Calculator', icon: Calculator, path: '/cgpa-calculator' },
         { title: 'Attendance', icon: Clock, path: '/attendance' },
         { title: 'Concept Maps', icon: Compass, path: '/concept-maps' },
-        { title: 'Labs', icon: Award, path: '/certifications' },
+        { title: 'Labs', icon: Gitlab, path: '/certifications' },
         { title: 'Events', icon: Calendar, path: '/events' },
         { title: 'Contact', icon: MessageSquare, path: '/contact' },
         {
