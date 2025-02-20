@@ -6,7 +6,7 @@ import {
     Calendar,
     Clock,
     Compass,
-    Award,
+    Gitlab,
     MessageSquare,
     LogInIcon,
     UserIcon
@@ -58,7 +58,7 @@ const App: React.FC = () => {
         { title: 'CGPA Calculator', icon: Calculator, path: '/cgpa-calculator' },
         { title: 'Attendance', icon: Clock, path: '/attendance' },
         { title: 'Concept Maps', icon: Compass, path: '/concept-maps' },
-        { title: 'Certifications', icon: Award, path: '/certifications' },
+        { title: 'Labs', icon: Award, path: '/certifications' },
         { title: 'Events', icon: Calendar, path: '/events' },
         { title: 'Contact', icon: MessageSquare, path: '/contact' },
         {
