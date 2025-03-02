@@ -13,7 +13,7 @@ const ConceptMapsPage = () => {
         { name: 'Database Management', link: 'https://example.com/database-management' },
         { name: 'Design Analysis and Algorithms', link: 'https://drive.google.com/file/d/157NaZMdICedhRDeKnhG-Dh5XgavNFWME/view?usp=sharing' },
         { name: 'Artificial Intelligence', link: 'https://drive.google.com/file/d/16nrYK3O1oOK36BhxHMY-uIhKdSKykztb/view?usp=sharing' },
-        { name: 'Compiler Design', link: 'https://drive.google.com/file/d/1xtyGgBINCu4qhaRD5qIWe9pddUpy08yx/view?usp=sharing' }
+        { name: 'Compiler Design', link: '/CSA14.pdf' }
       ],
       color: 'from-blue-500/20 to-blue-600/20'
     },
