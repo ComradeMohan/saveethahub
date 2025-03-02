@@ -7,13 +7,16 @@ const ConceptMapsPage = () => {
       title: 'Computer Science',
       icon: Network,
       topics: [
-        { name: 'Data Base Management Systems ', link: 'https://drive.google.com/file/d/1ZYxXFjJNjPg0E-2ICZEaI9wrfKcU9Bue/view' },
-        { name: 'Cryptography ', link: 'https://drive.google.com/file/d/17xWKmvzUT0JbAuIJSraPCQE7ehoGqSZg/view?usp=sharing' },
-        { name: 'Internet Programming', link: 'https://drive.google.com/file/d/19sAV6lBMd1MmGI6CHHb29WNBQZfmh3Ns/view?usp=sharing' },
-        { name: 'Database Management', link: 'https://example.com/database-management' },
-        { name: 'Design Analysis and Algorithms', link: 'https://drive.google.com/file/d/157NaZMdICedhRDeKnhG-Dh5XgavNFWME/view?usp=sharing' },
-        { name: 'Artificial Intelligence', link: 'https://drive.google.com/file/d/16nrYK3O1oOK36BhxHMY-uIhKdSKykztb/view?usp=sharing' },
-        { name: 'Compiler Design', link: '/CSA14.pdf' }
+        { name: 'Data Base Management Systems ', link: '/CSA05.pdf' },
+        { name: 'Cryptography ', link: '/CSA51.pdf' },
+        { name: 'Internet Programming', link: '/CSA43.pdf' },
+        { name: 'Operating System', link: '/CSA04.pdf' },
+        { name: 'Design Analysis and Algorithms', link: '/CSA06.pdf' },
+        { name: 'Artificial Intelligence', link: '/CSA17.pdf' },
+        { name: 'Compiler Design', link: '/CSA14.pdf' },
+        { name: 'Theory of Computation', link: '/CSA13.pdf' },
+        { name: 'Computer Networks', link: '/CSA07.pdf'},
+        { name: 'Computer Architecture', link: 'https://drive.google.com/file/d/16weBmSlmInDD8INzPlLo8FXGp30hzcvj/view?usp=sharing' }
       ],
       color: 'from-blue-500/20 to-blue-600/20'
     },
@@ -23,12 +26,10 @@ const ConceptMapsPage = () => {
       icon: Compass,
       topics: [
         { name: 'Professional Ethics', link: 'https://drive.google.com/file/d/1EPDjMyr4Rhhx2-FHq_QYsFwp57mEyZpL/view' },
-        { name: 'Biology', link: 'https://drive.google.com/file/d/1ZYxXFjJNjPg0E-2ICZEaI9wrfKcU9Bue/view' },
+        { name: 'Biology', link: '/BTA01.pdf' },
         { name: 'Fundamentals of computing', link: 'https://drive.google.com/file/d/1Di9RXsJBsZi0csYI9PVgbjM-ZANFUiPc/view?usp=sharing' },
-        { name: 'Microprocessor and Microcontrollers', link: 'https://drive.google.com/file/d/1F-ViYhMWEGdrcW3M9yfbkmpI6rUYqsa7/view?usp=sharing' },
-        { name: 'Computer Networks', link: 'https://drive.google.com/file/d/1SmbYnpSAbHslyIl-GZHCutPfnj-gjmra/view?usp=sharing '},
-        { name: 'Computer Architecture', link: 'https://drive.google.com/file/d/16weBmSlmInDD8INzPlLo8FXGp30hzcvj/view?usp=sharing' },
-        { name: 'Theory of Computation', link: 'https://drive.google.com/file/d/1h2X-v8cifsFQRDmIFTkWtn8Qgv847Qbc/view?usp=sharing' }
+        { name: 'Microprocessor and Microcontrollers', link: 'https://drive.google.com/file/d/1F-ViYhMWEGdrcW3M9yfbkmpI6rUYqsa7/view?usp=sharing' }
+        
       ],
       
       color: 'from-purple-500/20 to-purple-600/20'
