@@ -1,6 +1,5 @@
 # Saveetha Hub
 
-![Saveetha Hub](https://saveetha-hub.netlify.app/home)
 
 Saveetha Hub is an all-in-one academic companion designed to streamline student life. From CGPA calculations to attendance tracking and skill development courses, this platform provides essential tools for academic success.
 
