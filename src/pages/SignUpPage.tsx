@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { UserRound, KeyRound, Mail, Building } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
+import { auth, provider, signInWithPopup } from "../firebase";
 
 function Signup() {
   const navigate = useNavigate();
@@ -12,40 +13,49 @@ function Signup() {
     password: ''
   });
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
     console.log('Form submitted:', formData);
-    navigate('/login');
+    navigate('/Home'); // Redirect to Home after form submission
   };
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+  const handleInputChange = (e) => {
     setFormData({
       ...formData,
       [e.target.name]: e.target.value
     });
   };
 
+  const handleGoogleSignIn = async () => {
+    try {
+      const result = await signInWithPopup(auth, provider);
+      console.log("Google Sign-In Success:", result.user);
+      navigate("/home"); // Redirect after successful login
+    } catch (error) {
+      console.error("Google Sign-In Error:", error);
+    }
+  };
+
   return (
-    <div className=" flex flex-col items-center justify-center ">
+    <div className="flex flex-col items-center justify-center min-h-screen">
       <div className="w-full max-w-[400px] bg-white rounded-3xl shadow-lg p-8">
-        <div className="text-center mb-8">
-          <h1 className="text-2xl font-semibold text-gray-800 mb-2">Sign Up</h1>
-          <p className="text-gray-500 text-sm">Create your account (data not storing)</p>
+        <div className="text-center mb-6">
+          <h1 className="text-2xl font-semibold text-gray-800">Sign Up</h1>
+          <p className="text-gray-500 text-sm">Create your account</p>
         </div>
 
-        <form onSubmit={handleSubmit} className="space-y-5">
+        {/* Manual Signup Form */}
+        <form onSubmit={handleSubmit} className="space-y-4">
           <div>
             <label className="text-sm text-gray-600 mb-1 block">Full Name</label>
             <div className="relative">
-              <div className="absolute inset-y-0 left-4 flex items-center pointer-events-none">
-                <UserRound className="h-5 w-5 text-gray-400" />
-              </div>
+              <UserRound className="absolute left-4 top-3 text-gray-400" />
               <input
                 type="text"
                 name="fullName"
                 value={formData.fullName}
                 onChange={handleInputChange}
-                className="w-full pl-12 pr-4 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-blue-100 focus:border-blue-400 outline-none transition-all"
+                className="w-full pl-12 pr-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-200"
                 placeholder="Enter your full name"
                 required
               />
@@ -55,15 +65,13 @@ function Signup() {
           <div>
             <label className="text-sm text-gray-600 mb-1 block">Registration Number</label>
             <div className="relative">
-              <div className="absolute inset-y-0 left-4 flex items-center pointer-events-none">
-                <KeyRound className="h-5 w-5 text-gray-400" />
-              </div>
+              <KeyRound className="absolute left-4 top-3 text-gray-400" />
               <input
                 type="text"
                 name="registrationNumber"
                 value={formData.registrationNumber}
                 onChange={handleInputChange}
-                className="w-full pl-12 pr-4 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-blue-100 focus:border-blue-400 outline-none transition-all"
+                className="w-full pl-12 pr-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-200"
                 placeholder="e.g., 19YYDPRR"
                 required
               />
@@ -73,15 +81,13 @@ function Signup() {
           <div>
             <label className="text-sm text-gray-600 mb-1 block">Email Address</label>
             <div className="relative">
-              <div className="absolute inset-y-0 left-4 flex items-center pointer-events-none">
-                <Mail className="h-5 w-5 text-gray-400" />
-              </div>
+              <Mail className="absolute left-4 top-3 text-gray-400" />
               <input
                 type="email"
                 name="email"
                 value={formData.email}
                 onChange={handleInputChange}
-                className="w-full pl-12 pr-4 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-blue-100 focus:border-blue-400 outline-none transition-all"
+                className="w-full pl-12 pr-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-200"
                 placeholder="you@example.com"
                 required
               />
@@ -91,14 +97,12 @@ function Signup() {
           <div>
             <label className="text-sm text-gray-600 mb-1 block">Department</label>
             <div className="relative">
-              <div className="absolute inset-y-0 left-4 flex items-center pointer-events-none">
-                <Building className="h-5 w-5 text-gray-400" />
-              </div>
+              <Building className="absolute left-4 top-3 text-gray-400" />
               <select
                 name="department"
                 value={formData.department}
                 onChange={handleInputChange}
-                className="w-full pl-12 pr-4 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-blue-100 focus:border-blue-400 outline-none transition-all appearance-none bg-white"
+                className="w-full pl-12 pr-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-200 bg-white appearance-none"
                 required
               >
                 <option value="">Select department</option>
@@ -114,32 +118,39 @@ function Signup() {
           <div>
             <label className="text-sm text-gray-600 mb-1 block">Password</label>
             <div className="relative">
-              <div className="absolute inset-y-0 left-4 flex items-center pointer-events-none">
-                <KeyRound className="h-5 w-5 text-gray-400" />
-              </div>
+              <KeyRound className="absolute left-4 top-3 text-gray-400" />
               <input
                 type="password"
                 name="password"
                 value={formData.password}
                 onChange={handleInputChange}
-                className="w-full pl-12 pr-4 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-blue-100 focus:border-blue-400 outline-none transition-all"
+                className="w-full pl-12 pr-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-200"
                 placeholder="••••••••"
                 required
               />
             </div>
-            {/* <p className="text-xs text-gray-500 mt-1">
-              Password must contain at least 8 characters, including uppercase, lowercase, numbers and special characters
-            </p> */}
           </div>
 
           <button
             type="submit"
-            className="w-full bg-[#2c3a47] text-white py-3 rounded-xl hover:bg-[#34495e] transition-colors font-medium"
+            className="w-full bg-blue-600 text-white py-3 rounded-xl hover:bg-blue-700 transition-colors font-medium"
           >
             Create Account
           </button>
 
+          <div className="text-center text-gray-400 my-3">OR</div>
           <div className="text-center">
+
+             {/* Google Sign-In Button */}
+        <button
+          type="button"
+          onClick={handleGoogleSignIn}
+          className="w-full bg-red-500 text-white py-3 rounded-xl hover:bg-red-600 transition-colors font-medium flex items-center justify-center gap-2 mb-4"
+        >
+          <img src="https://www.svgrepo.com/show/475656/google-color.svg" alt="Google" className="w-5 h-5" />
+          Sign in with Google
+        </button>
+
             <button
               type="button"
               onClick={() => navigate('/login')}
@@ -150,11 +161,6 @@ function Signup() {
           </div>
         </form>
       </div>
-
-      {/* <footer className="mt-8 text-center text-sm text-white-500">
-        <p>© 2024 SaveethaHub SIMATS</p>
-        <p className="text-xs">All rights reserved</p>
-      </footer> */}
     </div>
   );
 }
