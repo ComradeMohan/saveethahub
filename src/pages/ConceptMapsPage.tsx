@@ -39,8 +39,8 @@ const ConceptMapsPage = () => {
       title: 'Mathematics',
       icon: Brain,
       topics: [
-        { name: 'M1-Engineering Mathematics', link: 'https://drive.google.com/file/d/1JTnmFBCOfxUy33o6ESIL2EvcFjZN_RvT/view' },
-        { name: 'M2-Discrete Mathematics', link: 'https://drive.google.com/file/d/1gBg3YHO2I_WrTb139pngZmHhEJ0PnXR2/view?usp=sharing' }
+        { name: 'M1-Engineering Mathematics', link: '/UBA01- Engineering Mathematics I.pdf' },
+        { name: 'M2-Discrete Mathematics', link: '/UBA04- Discrete Mathematics.pdf' }
       ],
       
       color: 'from-teal-500/20 to-teal-600/20'
