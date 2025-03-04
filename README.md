@@ -29,11 +29,11 @@ Saveetha Hub is an all-in-one academic companion designed to streamline student 
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/ComradeMohan/saveetha-hub.git
+   git clone https://github.com/ComradeMohan/saveethahub.git
    ```
 2. Navigate to the project directory:
    ```bash
-   cd saveetha-hub
+   cd saveethahub
    ```
 3. Install dependencies:
    ```bash
@@ -41,7 +41,7 @@ Saveetha Hub is an all-in-one academic companion designed to streamline student 
    ```
 4. Run the project locally:
    ```bash
-   npm start
+   npm run dev
    ```
 
 ## Contributing
