@@ -16,7 +16,7 @@ const ConceptMapsPage = () => {
         { name: 'Compiler Design', link: '/CSA14.pdf' },
         { name: 'Theory of Computation', link: '/CSA13.pdf' },
         { name: 'Computer Networks', link: '/CSA07.pdf'},
-        { name: 'Computer Architecture', link: 'https://drive.google.com/file/d/16weBmSlmInDD8INzPlLo8FXGp30hzcvj/view?usp=sharing' }
+        { name: 'Computer Architecture', link: '/CSA12 Computer Architecture.pdf' }
       ],
       color: 'from-blue-500/20 to-blue-600/20'
     },
@@ -25,7 +25,7 @@ const ConceptMapsPage = () => {
       title: 'Theory',
       icon: Compass,
       topics: [
-        { name: 'Professional Ethics', link: 'https://drive.google.com/file/d/1EPDjMyr4Rhhx2-FHq_QYsFwp57mEyZpL/view' },
+        { name: 'Professional Ethics', link: '/UBA28 Professional Ethics.pdf' },
         { name: 'Biology', link: '/BTA01.pdf' },
         { name: 'Fundamentals of computing', link: '/CSA57 Fundamentals of Computing.pdf' },
         { name: 'Microprocessor and Microcontrollers', link: '/ECA10 Microprocessor Architecture and Assembly language programming.pdf' }
