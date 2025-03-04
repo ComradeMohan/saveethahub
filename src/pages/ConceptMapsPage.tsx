@@ -7,7 +7,7 @@ const ConceptMapsPage = () => {
       title: 'Computer Science',
       icon: Network,
       topics: [
-        { name: 'Data Base Management Systems ', link: '/CSA05.pdf' },
+        { name: 'Data Base Management Systems ', link: '/CSA0510 Database management systems.pdf' },
         { name: 'Cryptography ', link: '/CSA51.pdf' },
         { name: 'Internet Programming', link: '/CSA43.pdf' },
         { name: 'Operating System', link: '/CSA04.pdf' },
