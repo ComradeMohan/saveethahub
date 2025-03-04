@@ -29,7 +29,7 @@ Saveetha Hub is an all-in-one academic companion designed to streamline student 
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/your-username/saveetha-hub.git
+   git clone https://github.com/ComradeMohan/saveetha-hub.git
    ```
 2. Navigate to the project directory:
    ```bash
