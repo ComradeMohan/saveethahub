@@ -49,8 +49,8 @@ const ConceptMapsPage = () => {
       title: 'Science',
       icon: Lightbulb,
       topics: [
-        { name: 'Engineering Physics', link: 'https://drive.google.com/file/d/1Byc3X8ou0tmvO5v1v38vkKopn-yEbMrk/view' },
-        { name: 'Engineering Chemistry', link: 'https://drive.google.com/file/d/1Javdl56A03lGSkBDEAoAX-S151M9acAl/view' }
+        { name: 'Engineering Physics', link: '/UBA48 Engineering Physics.pdf' },
+        { name: 'Engineering Chemistry', link: '/UBA49 Engineering Chemistry.pdf' }
       ],
       color: 'from-orange-500/20 to-orange-600/20'
     }
