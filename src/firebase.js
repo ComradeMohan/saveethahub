@@ -8,13 +8,13 @@ import { getAuth, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 // Your web app's Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
-  apiKey: "AIzaSyDM-EVFmMyWfbCb0QcT4N2cwTZ-aP0rXks",
-  authDomain: "saveethahub.firebaseapp.com",
-  projectId: "saveethahub",
-  storageBucket: "saveethahub.firebasestorage.app",
-  messagingSenderId: "750163172041",
-  appId: "1:750163172041:web:1328c0c6d315d4ac7fcb18",
-  measurementId: "G-THE06YGDJS"
+  apiKey: "AIzaSyCRjKHxrMXeXkEos92DAVWoMwqpp-VYLlk",
+  authDomain: "saveethahub-91e30.firebaseapp.com",
+  projectId: "saveethahub-91e30",
+  storageBucket: "saveethahub-91e30.firebasestorage.app",
+  messagingSenderId: "915364665988",
+  appId: "1:915364665988:web:c35a1f60e2afba683d00d1",
+  measurementId: "G-1B01FPQ9DX"
 };
 
 // Initialize Firebase
