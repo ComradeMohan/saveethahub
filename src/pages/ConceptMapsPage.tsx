@@ -27,8 +27,8 @@ const ConceptMapsPage = () => {
       topics: [
         { name: 'Professional Ethics', link: 'https://drive.google.com/file/d/1EPDjMyr4Rhhx2-FHq_QYsFwp57mEyZpL/view' },
         { name: 'Biology', link: '/BTA01.pdf' },
-        { name: 'Fundamentals of computing', link: 'https://drive.google.com/file/d/1Di9RXsJBsZi0csYI9PVgbjM-ZANFUiPc/view?usp=sharing' },
-        { name: 'Microprocessor and Microcontrollers', link: 'https://drive.google.com/file/d/1F-ViYhMWEGdrcW3M9yfbkmpI6rUYqsa7/view?usp=sharing' }
+        { name: 'Fundamentals of computing', link: '/CSA57 Fundamentals of Computing.pdf' },
+        { name: 'Microprocessor and Microcontrollers', link: '/ECA10 Microprocessor Architecture and Assembly language programming.pdf' }
         
       ],
       
