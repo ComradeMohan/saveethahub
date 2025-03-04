@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { UserRound, KeyRound } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
+import { auth, provider, signInWithPopup } from "../firebase";
 
 interface Props {
     setUser: (user: { username: string }) => void; // Function to set user in parent component
@@ -17,8 +18,8 @@ const Login: React.FC<Props> = ({ setUser }) => {
     const handleSubmit = (event: React.FormEvent) => {
         event.preventDefault();
 
-        // **No Authentication Check** - Directly set the user
-        setUser({ username: formData.registerNumber });  // Set the user with registration number
+        // No authentication check - Directly set the user
+        setUser({ username: formData.registerNumber });
 
         // Clear inputs after submission
         setFormData({
@@ -27,9 +28,7 @@ const Login: React.FC<Props> = ({ setUser }) => {
             rememberMe: false
         });
 
-        // Navigate to the home page
         navigate('/home'); // Redirect to home page
-
     };
 
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -40,14 +39,28 @@ const Login: React.FC<Props> = ({ setUser }) => {
         });
     };
 
+    const handleGoogleSignIn = async () => {
+        try {
+            const result = await signInWithPopup(auth, provider);
+            console.log("Google Sign-In Success:", result.user);
+            setUser({ username: result.user.displayName || "Google User" });
+            navigate("/home"); // Redirect after successful login
+        } catch (error) {
+            console.error("Google Sign-In Error:", error);
+        }
+    };
+
     return (
-        <div className="min-h-[89.5vh]  flex flex-col items-center justify-center ">
+        <div className="min-h-[89.5vh] flex flex-col items-center justify-center">
             <div className="w-full max-w-[400px] bg-white rounded-3xl shadow-lg p-8">
-                <div className="text-center mb-8">
-                    <h1 className="text-2xl font-semibold text-gray-800 mb-2">Student Login</h1>
+                <div className="text-center mb-6">
+                    <h1 className="text-2xl font-semibold text-gray-800">Student Login</h1>
                     <p className="text-gray-500 text-sm">Welcome back! (data not storing)</p>
                 </div>
 
+               
+
+                {/* Manual Login Form */}
                 <form onSubmit={handleSubmit} className="space-y-5">
                     <div>
                         <label className="text-sm text-gray-600 mb-1 block">Register Number</label>
@@ -105,6 +118,18 @@ const Login: React.FC<Props> = ({ setUser }) => {
                     >
                         Login
                     </button>
+                    
+                <div className="text-center text-gray-400 my-3">OR</div>
+
+ {/* Google Sign-In Button */}
+ <button
+                    type="button"
+                    onClick={handleGoogleSignIn}
+                    className="w-full bg-red-500 text-white py-3 rounded-xl hover:bg-red-600 transition-colors font-medium flex items-center justify-center gap-2 mb-4"
+                >
+                    <img src="https://www.svgrepo.com/show/475656/google-color.svg" alt="Google" className="w-5 h-5" />
+                    Sign in with Google
+                </button>
 
                     <div className="text-center">
                         <button
@@ -117,9 +142,8 @@ const Login: React.FC<Props> = ({ setUser }) => {
                     </div>
                 </form>
             </div>
-
         </div>
     );
-}
+};
 
 export default Login;
