@@ -1,7 +1,26 @@
 import React from 'react';
 import { GraduationCap, BookOpen, Award, Calendar } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
+// Separate GetStartedButton component
+const GetStartedButton = () => {
+  const navigate = useNavigate();
+
+  const handleClick = () => {
+    navigate('/login'); // Ensure this route is correct (e.g. '/login' if needed)
+  };
+
+  return (
+    <button
+      onClick={handleClick}
+      className="px-8 py-3 bg-teal-500 hover:bg-teal-600 text-white rounded-lg font-medium transition-colors"
+    >
+      Get Started
+    </button>
+  );
+};
+
+// Hero component using the GetStartedButton
 const Hero = () => {
   return (
     <div className="relative min-h-[calc(100vh-5rem)] flex items-center">
@@ -23,9 +42,7 @@ const Hero = () => {
               Calculate CGPA, track attendance, and discover learning opportunities.
             </p>
             <div className="flex flex-wrap gap-4">
-              <button className="px-8 py-3 bg-teal-500 hover:bg-teal-600 text-white rounded-lg font-medium transition-colors">
-                Get Started
-              </button>
+              <GetStartedButton />
               <button className="px-8 py-3 bg-white/10 hover:bg-white/20 text-white rounded-lg font-medium transition-colors backdrop-blur-sm">
                 Learn More
               </button>
@@ -39,30 +56,30 @@ const Hero = () => {
                   icon: GraduationCap,
                   title: 'Academic Tools',
                   desc: 'CGPA & Attendance Calculators',
-                  path: '/academics' // Path for Academic Tools
+                  path: '/academics'
                 },
                 {
                   icon: BookOpen,
                   title: 'Learning Resources',
                   desc: 'Interactive Concept Maps',
-                  path: '/concept-maps' // Path for Learning Resources
+                  path: '/concept-maps'
                 },
                 {
                   icon: Award,
                   title: 'Skill Development',
                   desc: 'Free Certifications',
-                  path: '/skills' // Path for Skill Development
+                  path: '/skills'
                 },
                 {
                   icon: Calendar,
                   title: 'Events',
                   desc: 'Stay Updated with Activities',
-                  path: '/events' // Path for Events
+                  path: '/events'
                 }
               ].map((item, index) => (
-                <Link // Wrap each item in a Link for navigation
+                <Link
                   key={index}
-                  to={item.path} // Set the destination path here
+                  to={item.path}
                   className="p-6 bg-white/10 backdrop-blur-lg rounded-xl hover:transform hover:-translate-y-1 transition-all duration-300"
                 >
                   <item.icon className="h-8 w-8 text-teal-400 mb-4" />
