@@ -6,7 +6,6 @@ import {
     Calendar,
     Clock,
     Compass,
-    
     MessageSquare,
     LogInIcon,
     UserIcon,
@@ -24,34 +23,27 @@ import CertificationsPage from './pages/CertificationsPage';
 import EventsPage from './pages/EventsPage';
 import ContactPage from './pages/ContactPage';
 import LoginPage from './pages/LoginPage';
-import Signup from './pages/SignUpPage'; // Import the Signup component
+import Signup from './pages/SignUpPage';
+import ProfilePage from './pages/ProfilePage';
 
 const App: React.FC = () => {
-    const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [user, setUser] = useState<{ username: string; email?: string } | null>(null);
-    const [isLoggedIn, setIsLoggedIn] = useState(false); // Track login status
-
-    // Check localStorage for existing user data
+    
     useEffect(() => {
         const storedUser = localStorage.getItem('user');
         if (storedUser) {
             setUser(JSON.parse(storedUser));
-            setIsLoggedIn(true); // Set logged-in status if user data exists
         }
     }, []);
 
-    // Update localStorage whenever user state changes
-    useEffect(() => {
-        if (user) {
-            localStorage.setItem('user', JSON.stringify(user));
-        } else {
-            localStorage.removeItem('user');
-        }
-    }, [user]);
-
-    const handleSetUser = (userData: { username: string }) => {
+    const handleSetUser = (userData: { username: string; email?: string }) => {
         setUser(userData);
-        setIsLoggedIn(true); // Update isLoggedIn when user is set
+        localStorage.setItem('user', JSON.stringify(userData));
+    };
+
+    const handleLogout = () => {
+        setUser(null);
+        localStorage.removeItem('user');
     };
 
     const navItems = [
@@ -65,42 +57,20 @@ const App: React.FC = () => {
         {
             title: user ? user.username : 'Login',
             icon: user ? UserIcon : LogInIcon,
-            path: '/login',
+            path: user ? '/profile' : '/login',
         },
     ];
 
     return (
         <Router>
             <div className="min-h-screen bg-gradient-to-br from-[#1a365d] to-[#0d9488]">
-                <Navbar
-                    items={navItems}
-                    isMenuOpen={isMenuOpen}
-                    setIsMenuOpen={setIsMenuOpen}
-                />
+                <Navbar items={navItems} />
                 <main className="container mx-auto px-4 pt-20">
                     <Routes>
-                        <Route
-                            path="/login"
-                            element={
-                                isLoggedIn ? (
-                                    <Navigate to="/home" replace />
-                                ) : (
-                                    <LoginPage setUser={handleSetUser} /> // Pass handleSetUser
-                                )
-                            }
-                        />
+                        <Route path="/login" element={user ? <Navigate to="/profile" replace /> : <LoginPage setUser={handleSetUser} />} />
                         <Route path="/signup" element={<Signup />} />
-                        <Route
-                            path="/home"
-                            element={
-                                isLoggedIn ? (
-                                    <HomePage />
-                                ) : (
-                                    <Navigate to="/login" replace />
-                                )
-                            }
-                        />
-                        <Route path="/" element={<Navigate to="/home" replace />} /> {/* Redirect to home if logged in */}
+                        <Route path="/profile" element={user ? <ProfilePage user={user} onLogout={handleLogout} /> : <Navigate to="/login" replace />} />
+                        <Route path="/home" element={<HomePage />} />
                         <Route path="/academics" element={<AcademicsPage />} />
                         <Route path="/cgpa-calculator" element={<CGPACalculatorPage />} />
                         <Route path="/attendance" element={<AttendancePage />} />
@@ -109,8 +79,8 @@ const App: React.FC = () => {
                         <Route path="/certifications" element={<CertificationsPage />} />
                         <Route path="/events" element={<EventsPage />} />
                         <Route path="/contact" element={<ContactPage />} />
+                        <Route path="/" element={<Navigate to="/home" replace />} />
                     </Routes>
-                    {user && <p>Logged in as: {user.username}</p>}
                 </main>
             </div>
         </Router>
