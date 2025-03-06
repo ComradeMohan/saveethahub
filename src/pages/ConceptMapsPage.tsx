@@ -89,6 +89,46 @@ const ConceptMapsPage = () => {
           </div>
         ))}
       </div>
+
+      <div className="mt-12 flex justify-center">
+        <form 
+          action="https://getform.io/f/agdpjpxb" 
+          method="POST" 
+          encType="multipart/form-data" 
+          className="bg-white/10 p-6 rounded-xl shadow-md max-w-md w-full text-white"
+        >
+          <h6 className="text-lg font-semibold mb-4">Kindly Add Missing Concept Maps (Max: 20MB)</h6>
+          <input 
+            type="file" 
+            name="file" 
+            required 
+            accept=".jpg,.png,.pdf,.docx"
+            className="bg-white/10 p-3 border border-white/30 rounded-lg w-full text-white cursor-pointer file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-white file:bg-blue-600 hover:file:bg-blue-700"
+            />
+          <input 
+            type="text" 
+            name="department" 
+            placeholder="Department" 
+            required 
+            className="bg-white/10 p-2 border border-white/20 rounded-md w-full text-white mt-2"
+          />
+          <input 
+            type="text" 
+            name="SUBJECT-CODE" 
+            placeholder="Subject Code" 
+            required 
+            className="bg-white/10 p-2 border border-white/20 rounded-md w-full text-white mt-2"
+          />
+          <input type="hidden" name="_gotcha" style={{ display: 'none' }} />
+          <button 
+            type="submit" 
+            className="bg-blue-600 hover:bg-blue-700 text-white font-semibold p-2 rounded-md w-full mt-4 transition-colors"
+          > 
+            Submit
+          </button>
+        </form>
+      </div>
+      
     </div>
   );
 };
