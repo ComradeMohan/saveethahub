@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { UserRound, KeyRound, Mail, Building } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
-import { auth, provider, signInWithPopup } from "../firebase";
+import { auth, provider,db, signInWithPopup,  createUserWithEmailAndPassword } from "../firebase";
+import { doc, setDoc } from "firebase/firestore"; // Import Firestore functions
 
 function Signup() {
   const navigate = useNavigate();
@@ -13,11 +14,32 @@ function Signup() {
     password: ''
   });
 
-  const handleSubmit = (e) => {
+
+    
+  const [isGoogleSignedIn, setIsGoogleSignedIn] = useState(false);
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log('Form submitted:', formData);
-    navigate('/Home'); // Redirect to Home after form submission
+    try {
+      const userCredential = await createUserWithEmailAndPassword(auth, formData.email, formData.password);
+      const user = userCredential.user;
+  
+      // Save user data in Firestore
+      await setDoc(doc(db, "users", user.uid), {
+        fullName: formData.fullName,
+        registrationNumber: formData.registrationNumber,
+        email: formData.email,
+        department: formData.department,
+        password: formData.password,
+        createdAt: new Date()
+      });
+  
+      navigate('/login'); // Redirect to login page
+    } catch (error) {
+      console.error("Error signing up:", error);
+    }
   };
+  
 
   const handleInputChange = (e) => {
     setFormData({
@@ -26,11 +48,18 @@ function Signup() {
     });
   };
 
+  
+
   const handleGoogleSignIn = async () => {
     try {
       const result = await signInWithPopup(auth, provider);
       console.log("Google Sign-In Success:", result.user);
-      navigate("/home"); // Redirect after successful login
+      setFormData({
+        ...formData,
+        fullName: result.user.displayName || '',
+        email: result.user.email || '',
+      });
+      setIsGoogleSignedIn(true); // Hide Google Sign-In button
     } catch (error) {
       console.error("Google Sign-In Error:", error);
     }
@@ -90,6 +119,7 @@ function Signup() {
                 className="w-full pl-12 pr-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-200"
                 placeholder="you@example.com"
                 required
+                disabled={isGoogleSignedIn} // Disable if signed in with Google
               />
             </div>
           </div>
@@ -140,16 +170,16 @@ function Signup() {
 
           <div className="text-center text-gray-400 my-3">OR</div>
           <div className="text-center">
-
-             {/* Google Sign-In Button */}
-        <button
-          type="button"
-          onClick={handleGoogleSignIn}
-          className="w-full bg-red-500 text-white py-3 rounded-xl hover:bg-red-600 transition-colors font-medium flex items-center justify-center gap-2 mb-4"
-        >
-          <img src="https://www.svgrepo.com/show/475656/google-color.svg" alt="Google" className="w-5 h-5" />
-          Sign in with Google
-        </button>
+            {!isGoogleSignedIn && (
+              <button
+                type="button"
+                onClick={handleGoogleSignIn}
+                className="w-full bg-red-500 text-white py-3 rounded-xl hover:bg-red-600 transition-colors font-medium flex items-center justify-center gap-2 mb-4"
+              >
+                <img src="https://www.svgrepo.com/show/475656/google-color.svg" alt="Google" className="w-5 h-5" />
+                Sign in with Google
+              </button>
+            )}
 
             <button
               type="button"
