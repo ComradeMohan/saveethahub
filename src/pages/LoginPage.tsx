@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { UserRound, KeyRound } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { auth, provider, signInWithPopup, db } from "../firebase";
-import { doc, getDoc, setDoc, collection, query, where, getDocs } from "firebase/firestore";
+import { doc, getDoc, setDoc, collection, query, where, getDocs, documentId } from "firebase/firestore";
 
 interface Props {
   setUser: (user: { username: string }) => void; // Function to set user in parent component
@@ -24,7 +24,7 @@ const Login: React.FC<Props> = ({ setUser }) => {
       const usersRef = collection(db, "users");
       const q = query(usersRef, where("registrationNumber", "==", formData.registerNumber));
       const querySnapshot = await getDocs(q);
-
+      const error = document.getElementById("error");
       if (!querySnapshot.empty) {
         // User found - Get the first matching document
         const userDoc = querySnapshot.docs[0];
@@ -35,10 +35,10 @@ const Login: React.FC<Props> = ({ setUser }) => {
           setUser({ username: userData.fullName });
           navigate("/home");
         } else {
-          alert("Incorrect password. Please try again.");
+          error!.textContent = "Invalid password. Please try again.";
         }
       } else {
-        alert("User not found. Please sign up.");
+        error!.textContent = "User not found. Please check your register number.";
       }
     } catch (error) {
       console.error("Login error:", error);
@@ -58,37 +58,41 @@ const Login: React.FC<Props> = ({ setUser }) => {
     try {
       const result = await signInWithPopup(auth, provider);
       const user = result.user;
-
-      // Check if user exists in Firestore
-      const userRef = doc(db, "users", user.uid);
-      const userSnap = await getDoc(userRef);
-
-      if (!userSnap.exists()) {
-        // If user does not exist, create a new user entry
-        await setDoc(userRef, {
-          fullName: user.displayName || "Google User",
-          email: user.email,
-          registrationNumber: "", // Optional: Leave empty as they signed in with Google
-          department: "Unknown", // Can be updated later
-          createdAt: new Date().toISOString(),
-        });
+  
+      // Reference to Firestore users collection
+      const usersRef = collection(db, "users");
+      const q = query(usersRef, where("email", "==", user.email));
+      const querySnapshot = await getDocs(q);
+  
+      const errorMessage = document.getElementById("error");
+  
+      if (!querySnapshot.empty) {
+        // User exists - Allow login
+        const userDoc = querySnapshot.docs[0];
+        const userData = userDoc.data();
+  
+        setUser({ username: userData.fullName });
+        navigate("/home");
+      } else {
+        // User not found - Show error and sign out
+        errorMessage!.textContent = "No user found with this email. Please sign up first.";
+        await auth.signOut();
       }
-
-      // Set user and navigate
-      setUser({ username: user.displayName || "Google User" });
-      navigate("/home");
     } catch (error) {
       console.error("Google Sign-In Error:", error);
-      alert("Google Sign-In failed. Please try again.");
+  
+      const GoogleError = document.getElementById("error");
+      GoogleError!.textContent = "Google Sign In error. Please try again.";
     }
   };
-
+  
   return (
     <div className="min-h-[89.5vh] flex flex-col items-center justify-center">
       <div className="w-full max-w-[400px] bg-white rounded-3xl shadow-lg p-8">
         <div className="text-center mb-6">
           <h1 className="text-2xl font-semibold text-gray-800">Student Login</h1>
           <p className="text-gray-500 text-sm">Welcome back!</p>
+          <p className="text-red-600 text-sm" id="error"></p>
         </div>
 
         <form onSubmit={handleSubmit} className="space-y-5">
