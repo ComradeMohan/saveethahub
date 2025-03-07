@@ -21,23 +21,44 @@ function Signup() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const userCredential = await createUserWithEmailAndPassword(auth, formData.email, formData.password);
-      const user = userCredential.user;
+      if (isGoogleSignedIn) {
+        // If user signed in with Google, update their details in Firestore
+        const user = auth.currentUser;
+        if (user) {
+          await setDoc(doc(db, "users", user.uid), {
+            fullName: formData.fullName,
+            registrationNumber: formData.registrationNumber,
+            email: formData.email,
+            department: formData.department,
+            password: formData.password,
+            createdAt: new Date()
+          }, { merge: true }); // Merge to update existing user data
   
-      // Save user data in Firestore
-      await setDoc(doc(db, "users", user.uid), {
-        fullName: formData.fullName,
-        registrationNumber: formData.registrationNumber,
-        email: formData.email,
-        department: formData.department,
-        password: formData.password,
-        createdAt: new Date()
-      });
-  
-      navigate('/login'); // Redirect to login page
-    } catch (error) {
-      console.error("Error signing up:", error);
-    }
+          navigate('/login');
+        }
+      } 
+      else{
+
+
+          const userCredential = await createUserWithEmailAndPassword(auth, formData.email, formData.password);
+          const user = userCredential.user;
+      
+          // Save user data in Firestore
+          await setDoc(doc(db, "users", user.uid), {
+            fullName: formData.fullName,
+            registrationNumber: formData.registrationNumber,
+            email: formData.email,
+            department: formData.department,
+            password: formData.password,
+            createdAt: new Date()
+          });
+      
+          navigate('/login'); // Redirect to login page
+        }
+      }
+        catch (error) {
+          console.error("Error signing up:", error);
+        }
   };
   
 
