@@ -28,7 +28,8 @@ import ProfilePage from './pages/ProfilePage';
 
 const App: React.FC = () => {
     const [user, setUser] = useState<{ username: string; email?: string } | null>(null);
-    
+    const [isMenuOpen, setIsMenuOpen] = useState(false); // ✅ Added state for mobile menu
+
     useEffect(() => {
         const storedUser = localStorage.getItem('user');
         if (storedUser) {
@@ -64,7 +65,8 @@ const App: React.FC = () => {
     return (
         <Router>
             <div className="min-h-screen bg-gradient-to-br from-[#1a365d] to-[#0d9488]">
-                <Navbar items={navItems} />
+                {/* ✅ Pass isMenuOpen and setIsMenuOpen */}
+                <Navbar items={navItems} isMenuOpen={isMenuOpen} setIsMenuOpen={setIsMenuOpen} />
                 <main className="container mx-auto px-4 pt-20">
                     <Routes>
                         <Route path="/login" element={user ? <Navigate to="/profile" replace /> : <LoginPage setUser={handleSetUser} />} />
