@@ -32,6 +32,7 @@ const Login: React.FC<Props> = ({ setUser }) => {
 
         if (userData.password === formData.password) {
           // Successful login
+          localStorage.setItem("userEmail", userData.email);
           setUser({ username: userData.fullName });
           navigate("/home");
         } else {
@@ -70,7 +71,8 @@ const Login: React.FC<Props> = ({ setUser }) => {
         // User exists - Allow login
         const userDoc = querySnapshot.docs[0];
         const userData = userDoc.data();
-  
+
+        localStorage.setItem("userEmail", userData.email);
         setUser({ username: userData.fullName });
         navigate("/home");
       } else {
