@@ -2,7 +2,10 @@
 import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
 import { getAuth, GoogleAuthProvider, signInWithPopup ,createUserWithEmailAndPassword} from "firebase/auth";
-import { getFirestore } from "firebase/firestore";
+import { 
+  getFirestore, collection, getDocs, addDoc, query, where, orderBy, serverTimestamp 
+} from "firebase/firestore";
+import { getMessaging, getToken, onMessage } from "firebase/messaging";
 
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
@@ -27,4 +30,41 @@ const provider = new GoogleAuthProvider();
 
 const db = getFirestore(app); // Firestore instance
 
-export { auth, provider, signInWithPopup,  createUserWithEmailAndPassword, db };
+// ✅ Initialize Firebase Messaging (with error handling)
+let messaging;
+try {
+  messaging = getMessaging(app);
+} catch (error) {
+  console.error("Firebase Messaging not supported in this environment:", error);
+}
+
+// ✅ Function to Request Notification Permission
+const requestNotificationPermission = async () => {
+  if (!messaging) return; // Skip if messaging isn't available
+
+  try {
+    const token = await getToken(messaging, { vapidKey: "YOUR_WEB_PUSH_CERTIFICATE_KEY" });
+    if (token) {
+      console.log("FCM Token:", token);
+    } else {
+      console.warn("No token received. Request permission.");
+    }
+  } catch (error) {
+    console.error("Error getting FCM token:", error);
+  }
+};
+
+// ✅ Handle Incoming Messages (Foreground)
+if (messaging) {
+  onMessage(messaging, (payload) => {
+    console.log("Message received:", payload);
+    alert(`New Message: ${payload.notification.title} - ${payload.notification.body}`);
+  });
+}
+
+// ✅ Export Firebase Services
+export { 
+  auth, provider, signInWithPopup, createUserWithEmailAndPassword, db, 
+  messaging, requestNotificationPermission, addDoc, collection, getDocs, 
+  query, where, orderBy, serverTimestamp
+};
