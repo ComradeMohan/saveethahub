@@ -23,7 +23,7 @@ const GetStartedButton = () => {
 // Hero component using the GetStartedButton
 const Hero = () => {
   return (
-    <div className="relative min-h-[calc(100vh-5rem)] pt-10 flex items-center">
+    <div className="relative min-h-[calc(100vh-5rem)] flex items-center">
       {/* Background Elements */}
       <div className="absolute inset-0 overflow-hidden">
         <div className="absolute top-20 left-10 w-72 h-72 bg-blue-500/20 rounded-full filter blur-3xl"></div>
@@ -70,12 +70,14 @@ const Hero = () => {
                   desc: 'Stay Updated with Activities',
                   path: '/events'
                 },
-                {
-                  icon: Communities,
-                  title: 'Events',
-                  desc: 'Join Your Community',
-                  path: '/community'
-                }
+                
+               {
+  icon: Communities,
+  title: 'Academic Tools', // Add a meaningful title
+  desc: 'Join our communities',
+  path: '/community'
+}
+
               ].map((item, index) => (
                 <Link
                   key={index}
