@@ -83,12 +83,12 @@ const CommunityPage = () => {
     };
 
     return (
-        <div className="p-4">
-            <h1 className="text-2xl font-bold">Join a Community</h1>
+        <div className="p-4 pt-10">
+            <h1 className="text-2xl text-white font-bold">Join a Community</h1>
             <ul className="mt-4">
                 {communities.map((comm) => (
                     <li key={comm.id} className="p-3 border rounded-lg mb-2">
-                        <h2 className="text-lg font-semibold">{comm.name}</h2>
+                        <h2 className="text-lg text-white font-semibold">{comm.name}</h2>
                         <button 
                             onClick={() => handleCommunityClick(comm.id)} 
                             className={`mt-2 px-4 py-2 rounded ${
