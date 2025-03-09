@@ -1,5 +1,5 @@
 import React from 'react';
-import { GraduationCap, BookOpen, Award, Calendar } from 'lucide-react';
+import { GraduationCap, BookOpen, Award, Calendar,group } from 'lucide-react';
 import { Link, useNavigate } from 'react-router-dom';
 
 // Separate GetStartedButton component
@@ -72,7 +72,7 @@ const Hero = () => {
                 },
                 
                {
-  icon: Communities,
+  icon: group,
   title: 'Academic Tools', // Add a meaningful title
   desc: 'Join our communities',
   path: '/community'
