@@ -1,30 +1,41 @@
 import React, { useState, useEffect } from "react";
+import { motion, useInView } from "framer-motion";
 import { collection, getDocs, query, where, doc, updateDoc, arrayUnion } from "firebase/firestore";
 import { db } from "../firebase";
 import { useNavigate } from "react-router-dom";
+
+const SubjectItem = ({ subj, index }) => {
+  const ref = React.useRef(null);
+  const isInView = useInView(ref, { once: true });
+
+  return (
+    <motion.li
+      ref={ref}
+      className="flex justify-between p-3 bg-white/15 rounded-lg text-white"
+      initial={{ opacity: 0, y: 20 }}
+      animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+      transition={{ duration: 0.5, delay: index * 0.1 }} // 👈 Staggering effect
+    >
+      <span>{subj.name}</span>
+      <span>{subj.grade}</span>
+    </motion.li>
+  );
+};
 
 const CGPACalculatorPage = () => {
   const [subject, setSubject] = useState("");
   const [grade, setGrade] = useState("S");
   const [subjects, setSubjects] = useState([]);
-  const [cgpa, setCGPA] = useState(0.0); // Default to 0
+  const [cgpa, setCGPA] = useState(0.0);
   const [userData, setUserData] = useState(null);
   const navigate = useNavigate();
 
-  const gradePoints = {
-    S: 10,
-    A: 9,
-    B: 8,
-    C: 7,
-    D: 6,
-    E: 5,
-  };
+  const gradePoints = { S: 10, A: 9, B: 8, C: 7, D: 6, E: 5 };
 
   useEffect(() => {
     fetchUserData();
   }, []);
 
-  // Fetch user data and grades from Firestore
   const fetchUserData = async () => {
     const userEmail = localStorage.getItem("userEmail");
     if (!userEmail) {
@@ -43,7 +54,6 @@ const CGPACalculatorPage = () => {
         const data = userDoc.data();
         setUserData({ id: userDoc.id, ...data });
 
-        // Load existing subjects & CGPA if present
         if (data.grades) {
           setSubjects(data.grades);
           calculateCGPA(data.grades);
@@ -54,7 +64,6 @@ const CGPACalculatorPage = () => {
     }
   };
 
-  // Add new subject (Triggers CGPA recalculation)
   const handleAddSubject = async () => {
     if (subject.trim() === "") return;
 
@@ -67,7 +76,6 @@ const CGPACalculatorPage = () => {
 
     calculateCGPA(updatedSubjects);
 
-    // Update Firestore with the new subject
     if (userData) {
       try {
         const userRef = doc(db, "users", userData.id);
@@ -80,10 +88,9 @@ const CGPACalculatorPage = () => {
     }
   };
 
-  // Calculate CGPA and update Firestore
   const calculateCGPA = async (updatedSubjects) => {
     if (updatedSubjects.length === 0) {
-      setCGPA(0.0); // If no subjects, CGPA is 0
+      setCGPA(0.0);
       return;
     }
 
@@ -91,7 +98,6 @@ const CGPACalculatorPage = () => {
     const calculatedCGPA = totalPoints / updatedSubjects.length;
     setCGPA(calculatedCGPA);
 
-    // Update Firestore with CGPA
     if (userData) {
       try {
         const userRef = doc(db, "users", userData.id);
@@ -111,54 +117,51 @@ const CGPACalculatorPage = () => {
         </p>
       </div>
 
-      <div className="max-w-4xl mx-auto bg-white rounded-xl p-8 shadow-lg">
+      <div className="max-w-4xl mx-auto bg-white/5 rounded-xl p-8 shadow-lg">
         <div className="mb-8">
           <div className="flex flex-col md:flex-row gap-4">
             <input
               type="text"
               value={subject}
               onChange={(e) => setSubject(e.target.value)}
-              className="w-full md:w-2/3 p-3 border border-gray-300 rounded-lg"
+              className="w-full md:w-2/3 p-3 border bg-white/10 border-gray-300 rounded-lg text-white"
               placeholder="Subject Name"
               required
             />
             <select
               value={grade}
               onChange={(e) => setGrade(e.target.value)}
-              className="w-full md:w-1/3 p-3 border border-gray-300 rounded-lg"
+              className="w-full md:w-1/3 p-3 border bg-white/10 border-gray-300 rounded-lg text-white appearance-none"
             >
               {Object.keys(gradePoints).map((g) => (
-                <option key={g} value={g}>{g}</option>
+                <option key={g} value={g} className="bg-gray-900 text-white">
+                  {g}
+                </option>
               ))}
             </select>
           </div>
           <button
             onClick={handleAddSubject}
-            className="mt-4 w-full md:w-auto px-6 py-3 bg-blue-500 hover:bg-blue-600 text-white rounded-lg transition-colors"
+            className="mt-4 w-full md:w-auto px-6 py-3 bg-teal-500 hover:bg-green-600 text-white rounded-lg transition-colors"
           >
             Add Subject
           </button>
 
-          <div className="mt-8 text-center">
-          <h2 className="text-3xl font-bold text-gray-800">
-            Your CGPA: {cgpa.toFixed(2)}
-          </h2>
-        </div>
+          <div className=" text-center">
+            <h2 className="text-3xl font-bold text-white">
+              Your CGPA: {cgpa.toFixed(2)}
+            </h2>
+          </div>
         </div>
 
         <div>
-          <h2 className="text-2xl font-bold mb-4">Subjects</h2>
+          <h2 className="text-2xl text-white font-bold mb-4">Subjects</h2>
           <ul className="space-y-2">
             {subjects.map((subj, index) => (
-              <li key={index} className="flex justify-between p-3 bg-gray-100 rounded-lg">
-                <span>{subj.name}</span>
-                <span>{subj.grade}</span>
-              </li>
+              <SubjectItem key={index} subj={subj} index={index} />
             ))}
           </ul>
         </div>
-
-       
       </div>
     </div>
   );
