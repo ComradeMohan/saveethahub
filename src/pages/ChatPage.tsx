@@ -51,14 +51,14 @@ const ChatPage = () => {
     };
 
     return (
-        <div className="p-4">
-            <h1 className="text-2xl font-bold">Community Chat</h1>
+        <div className="p-4 pt-10">
+            <h1 className="text-2xl text-white font-bold pb-4">Community Chat</h1>
 
             {/* Chat Messages Box */}
-            <div className="border p-4 h-96 overflow-y-auto bg-gray-100 rounded-md">
+            <div className="border p-4 bg-white/10 h-96 overflow-y-auto bg-gray-100 rounded-md">
                 {messages.length > 0 ? (
                     messages.map((msg) => (
-                        <div key={msg.id} className="p-2 border-b bg-white rounded-md my-1">
+                        <div key={msg.id} className="p-2 border-b bg-white/100 rounded-md my-1">
                             {msg.text}
                         </div>
                     ))
