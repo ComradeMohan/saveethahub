@@ -53,12 +53,6 @@ const Hero = () => {
             <div className="grid grid-cols-2 gap-4">
               {[
                 {
-                  icon: GraduationCap,
-                  title: 'Academic Tools',
-                  desc: 'CGPA & Attendance Calculators',
-                  path: '/academics'
-                },
-                {
                   icon: BookOpen,
                   title: 'Learning Resources',
                   desc: 'Interactive Concept Maps',
@@ -75,6 +69,12 @@ const Hero = () => {
                   title: 'Events',
                   desc: 'Stay Updated with Activities',
                   path: '/events'
+                },
+                {
+                  icon: Communities,
+                  title: 'Events',
+                  desc: 'Join Your Community',
+                  path: '/community'
                 }
               ].map((item, index) => (
                 <Link
