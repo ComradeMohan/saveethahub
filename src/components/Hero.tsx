@@ -73,7 +73,7 @@ const Hero = () => {
                 
                {
   icon: group,
-  title: 'Academic Tools', // Add a meaningful title
+  title: 'Community', // Add a meaningful title
   desc: 'Join our communities',
   path: '/community'
 }
