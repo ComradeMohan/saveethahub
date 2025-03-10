@@ -1,160 +1,122 @@
 import React, { useState, useEffect } from "react";
-import { useParams, useNavigate } from "react-router-dom";
-import { db } from "../firebase"; 
-import { 
-    collection, query, where, orderBy, addDoc, serverTimestamp, onSnapshot, getDocs, deleteDoc, doc 
-} from "firebase/firestore";
+import { useNavigate } from "react-router-dom";
+import { db, requestNotificationPermission } from "../firebase";
+import { collection, getDocs, addDoc, query, where } from "firebase/firestore";
 
-const ChatPage = () => {
-    const { communityId } = useParams();  
-    const navigate = useNavigate();
-    const [messages, setMessages] = useState([]);
-    const [newMessage, setNewMessage] = useState("");
+const CommunityPage = () => {
+    const [communities, setCommunities] = useState([]);
+    const [joinedCommunities, setJoinedCommunities] = useState([]);
     const [user, setUser] = useState(null);
+    const [loading, setLoading] = useState(true);
+    const navigate = useNavigate();
 
-    // Fetch user from localStorage
     useEffect(() => {
-        const fetchUserData = async () => {
-            const userEmail = localStorage.getItem("userEmail");
-            const userName = localStorage.getItem("fullname"); // Assuming you store name in localStorage
+        const fetchCommunities = async () => {
+            try {
+                const querySnapshot = await getDocs(collection(db, "communities"));
+                setCommunities(querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() })));
+            } catch (error) {
+                console.error("Error fetching communities: ", error);
+            }
+        };
 
+        const fetchUser = async () => {
+            const userEmail = localStorage.getItem("userEmail");
             if (!userEmail) {
                 console.log("No user email found. Redirecting to login...");
                 navigate("/login");
                 return;
             }
 
-            setUser({
-                email: userEmail,
-                displayName: userName || "Anonymous",
-            });
+            try {
+                const usersRef = collection(db, "users");
+                const q = query(usersRef, where("email", "==", userEmail));
+                const querySnapshot = await getDocs(q);
+
+                if (!querySnapshot.empty) {
+                    const userDoc = querySnapshot.docs[0];
+                    const userData = { id: userDoc.id, ...userDoc.data() };
+                    setUser(userData);
+                    fetchJoinedCommunities(userData.id);
+                }
+            } catch (error) {
+                console.error("Error fetching user data:", error);
+            }
         };
 
-        fetchUserData();
+        const fetchJoinedCommunities = async (userId) => {
+            try {
+                const q = query(collection(db, "community_members"), where("userId", "==", userId));
+                const querySnapshot = await getDocs(q);
+                setJoinedCommunities(querySnapshot.docs.map(doc => doc.data().communityId));
+            } catch (error) {
+                console.error("Error fetching joined communities: ", error);
+            } finally {
+                setLoading(false);
+            }
+        };
+
+        fetchCommunities();
+        fetchUser();
     }, [navigate]);
 
-    useEffect(() => {
-        if (!communityId) {
-            console.error("Community ID is missing!");
-            return;
-        }
-
-        const messagesRef = collection(db, "messages");
-        const q = query(
-            messagesRef,
-            where("communityId", "==", communityId), 
-            orderBy("timestamp", "asc")
-        );
-
-        const unsubscribe = onSnapshot(q, (querySnapshot) => {
-            const fetchedMessages = querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
-            setMessages(fetchedMessages);
-        });
-
-        return () => unsubscribe();
-    }, [communityId]);
-
-    const sendMessage = async () => {
-        if (!newMessage.trim()) {
-            alert("Message cannot be empty!");
-            
-            return;
-        }
+    const handleCommunityClick = async (communityId) => {
         if (!user) {
-            alert("You must be logged in to send a message!");
-            navigate("/login");
+            alert("Please log in first!");
             return;
         }
 
-        try {
-            await addDoc(collection(db, "messages"), {
-                communityId,
-                text: newMessage,
-                senderName: user.displayName, // Store sender's name
-                senderEmail: user.email, // Optional for identifying users
-                timestamp: serverTimestamp(),
-            });
-            setNewMessage("");
-        } catch (error) {
-            console.error("Error sending message:", error);
-        }
-    };
-
-    // Leave Community Function
-    const leaveCommunity = async () => {
-        if (!user) {
-            alert("You must be logged in to leave the community!");
+        const permission = await Notification.requestPermission();
+        if (permission !== "granted") {
+            alert("You must enable notifications to receive updates.");
+            requestNotificationPermission(user.id);
             return;
         }
 
-        try {
-            const communityMembersRef = collection(db, "community_members");
-            const q = query(
-                communityMembersRef,
-                where("email", "==", user.email),
-                where("communityId", "==", communityId)
-            );
-            const querySnapshot = await getDocs(q);
+        await requestNotificationPermission(user.id);
 
-            if (!querySnapshot.empty) {
-                const docId = querySnapshot.docs[0].id; // Get the user's membership doc ID
-                await deleteDoc(doc(db, "community_members", docId)); // Remove user from the community
-
-                alert("You have left the community.");
-                navigate("/"); // Redirect to home page
-            } else {
-                navigate("/community");
+        if (joinedCommunities.includes(communityId)) {
+            navigate(`/chat/${communityId}`);
+        } else {
+            try {
+                await addDoc(collection(db, "community_members"), {
+                    userId: user.id,
+                    communityId
+                });
+                setJoinedCommunities((prev) => [...prev, communityId]);
+                navigate(`/chat/${communityId}`);
+            } catch (error) {
+                console.error("Error joining community: ", error);
             }
-        } catch (error) {
-            console.error("Error leaving community:", error);
-            alert("Failed to leave community.");
         }
     };
 
     return (
         <div className="p-4 pt-10">
-            <h1 className="text-2xl text-white font-bold pb-4">Community Chat</h1>
-
-            {/* Leave Community Button */}
-            <button 
-                onClick={leaveCommunity} 
-                className="bg-red-500 text-white px-4 py-2 mb-4 rounded-md"
-            >
-                Leave Community
-            </button>
-
-            {/* Chat Messages Box */}
-            <div className="border p-4 bg-white/10 h-96 overflow-y-auto bg-gray-100 rounded-md">
-                {messages.length > 0 ? (
-                    messages.map((msg) => (
-                        <div key={msg.id} className={`p-2 border-b rounded-md my-1 ${msg.senderEmail === user?.email ? "bg-blue-100 text-right" : "bg-white text-left"}`}>
-                            <p className="text-sm font-bold text-blue-600">{msg.senderName}</p>
-                            <p className="text-black">{msg.text}</p>
-                        </div>
+            <h1 className="text-2xl text-white font-bold">Join a Community</h1>
+            <ul className="mt-4">
+                {loading ? (
+                    [...Array(3)].map((_, index) => (
+                        <li key={index} className="p-3 border rounded-lg mb-2 animate-pulse bg-gray-700 h-16"></li>
                     ))
                 ) : (
-                    <p className="text-gray-500">No messages yet.</p>
+                    communities.map((comm) => (
+                        <li key={comm.id} className="p-3 border rounded-lg mb-2">
+                            <h2 className="text-lg text-white font-semibold">{comm.name}</h2>
+                            <button 
+                                onClick={() => handleCommunityClick(comm.id)} 
+                                className={`mt-2 px-4 py-2 rounded ${
+                                    joinedCommunities.includes(comm.id) ? "bg-green-500" : "bg-blue-500"
+                                } text-white`}
+                            >
+                                {joinedCommunities.includes(comm.id) ? "Enter" : "Join"}
+                            </button>
+                        </li>
+                    ))
                 )}
-            </div>
-
-            {/* Input and Send Button */}
-            <div className="mt-4 flex">
-                <input 
-                    type="text" 
-                    value={newMessage} 
-                    onChange={(e) => setNewMessage(e.target.value)} 
-                    className="border p-2 flex-grow rounded-md"
-                    placeholder="Type your message..."
-                />
-                <button 
-                    onClick={sendMessage} 
-                    className="bg-blue-500 text-white px-4 py-2 ml-2 rounded-md"
-                >
-                    Send
-                </button>
-            </div>
+            </ul>
         </div>
     );
 };
 
-export default ChatPage;
+export default CommunityPage;
