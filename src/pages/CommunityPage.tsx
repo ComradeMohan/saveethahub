@@ -1,122 +1,85 @@
-import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
-import { db, requestNotificationPermission } from "../firebase";
-import { collection, getDocs, addDoc, query, where } from "firebase/firestore";
+// Import Firebase SDKs
+import { initializeApp } from "firebase/app";
+import { getAnalytics } from "firebase/analytics";
+import { getAuth, GoogleAuthProvider, signInWithPopup, createUserWithEmailAndPassword } from "firebase/auth";
+import {
+  getFirestore, collection, getDocs, addDoc, setDoc, doc, query, where, orderBy, serverTimestamp 
+} from "firebase/firestore";
+import { getMessaging, getToken, onMessage } from "firebase/messaging";
 
-const CommunityPage = () => {
-    const [communities, setCommunities] = useState([]);
-    const [joinedCommunities, setJoinedCommunities] = useState([]);
-    const [user, setUser] = useState(null);
-    const [loading, setLoading] = useState(true);
-    const navigate = useNavigate();
-
-    useEffect(() => {
-        const fetchCommunities = async () => {
-            try {
-                const querySnapshot = await getDocs(collection(db, "communities"));
-                setCommunities(querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() })));
-            } catch (error) {
-                console.error("Error fetching communities: ", error);
-            }
-        };
-
-        const fetchUser = async () => {
-            const userEmail = localStorage.getItem("userEmail");
-            if (!userEmail) {
-                console.log("No user email found. Redirecting to login...");
-                navigate("/login");
-                return;
-            }
-
-            try {
-                const usersRef = collection(db, "users");
-                const q = query(usersRef, where("email", "==", userEmail));
-                const querySnapshot = await getDocs(q);
-
-                if (!querySnapshot.empty) {
-                    const userDoc = querySnapshot.docs[0];
-                    const userData = { id: userDoc.id, ...userDoc.data() };
-                    setUser(userData);
-                    fetchJoinedCommunities(userData.id);
-                }
-            } catch (error) {
-                console.error("Error fetching user data:", error);
-            }
-        };
-
-        const fetchJoinedCommunities = async (userId) => {
-            try {
-                const q = query(collection(db, "community_members"), where("userId", "==", userId));
-                const querySnapshot = await getDocs(q);
-                setJoinedCommunities(querySnapshot.docs.map(doc => doc.data().communityId));
-            } catch (error) {
-                console.error("Error fetching joined communities: ", error);
-            } finally {
-                setLoading(false);
-            }
-        };
-
-        fetchCommunities();
-        fetchUser();
-    }, [navigate]);
-
-    const handleCommunityClick = async (communityId) => {
-        if (!user) {
-            alert("Please log in first!");
-            return;
-        }
-
-        const permission = await Notification.requestPermission();
-        if (permission !== "granted") {
-            alert("You must enable notifications to receive updates.");
-            requestNotificationPermission(user.id);
-            return;
-        }
-
-        await requestNotificationPermission(user.id);
-
-        if (joinedCommunities.includes(communityId)) {
-            navigate(`/chat/${communityId}`);
-        } else {
-            try {
-                await addDoc(collection(db, "community_members"), {
-                    userId: user.id,
-                    communityId
-                });
-                setJoinedCommunities((prev) => [...prev, communityId]);
-                navigate(`/chat/${communityId}`);
-            } catch (error) {
-                console.error("Error joining community: ", error);
-            }
-        }
-    };
-
-    return (
-        <div className="p-4 pt-10">
-            <h1 className="text-2xl text-white font-bold">Join a Community</h1>
-            <ul className="mt-4">
-                {loading ? (
-                    [...Array(3)].map((_, index) => (
-                        <li key={index} className="p-3 border rounded-lg mb-2 animate-pulse bg-gray-700 h-16"></li>
-                    ))
-                ) : (
-                    communities.map((comm) => (
-                        <li key={comm.id} className="p-3 border rounded-lg mb-2">
-                            <h2 className="text-lg text-white font-semibold">{comm.name}</h2>
-                            <button 
-                                onClick={() => handleCommunityClick(comm.id)} 
-                                className={`mt-2 px-4 py-2 rounded ${
-                                    joinedCommunities.includes(comm.id) ? "bg-green-500" : "bg-blue-500"
-                                } text-white`}
-                            >
-                                {joinedCommunities.includes(comm.id) ? "Enter" : "Join"}
-                            </button>
-                        </li>
-                    ))
-                )}
-            </ul>
-        </div>
-    );
+// 🔹 Your Firebase Configuration (Replace with actual values)
+const firebaseConfig = {
+  apiKey: "AIzaSyC_I05eW6R3He8Xj_ByGVi_xSsD5J-DAyw",
+  authDomain: "saveethahub-cb3a9.firebaseapp.com",
+  projectId: "saveethahub-cb3a9",
+  storageBucket: "saveethahub-cb3a9.firebasestorage.app",
+  messagingSenderId: "747596429747",
+  appId: "1:747596429747:web:2f6edd084d4d2bb28933c6",
+  measurementId: "G-DQ9G839TL4"
 };
 
-export default CommunityPage;
+// ✅ Initialize Firebase
+const app = initializeApp(firebaseConfig);
+const analytics = getAnalytics(app);
+const auth = getAuth(app);
+const provider = new GoogleAuthProvider();
+const db = getFirestore(app);
+
+// ✅ Initialize Firebase Messaging (with error handling)
+let messaging;
+try {
+  messaging = getMessaging(app);
+} catch (error) {
+  console.error("Firebase Messaging not supported in this environment:", error);
+}
+
+// ✅ Function to Request Notification Permission & Store Token in Firestore
+const requestNotificationPermission = async (userId) => {
+  if (!messaging) return; // Skip if messaging isn't available
+
+  try {
+    const permission = await Notification.requestPermission();
+    console.log("Notification Permission:", permission);
+
+    if (permission === "granted") {
+      const token = await getToken(messaging, { vapidKey: "BGtV6Fv6gTgcTybr5q7yckKYeUyl5qDPTzCBoGXbd9hH5AftO3NgRyQt1mTPQIoD7hvpyciOHFepsJnqydyFxbA" });
+      if (token) {
+        console.log("FCM Token:", token);
+
+        // 🔹 Save token to Firestore (so we can send notifications)
+        if (userId) {
+          await setDoc(doc(db, "user_tokens", userId), { fcmToken: token }, { merge: true });
+        }
+      } else {
+        console.warn("No token received. Request permission.");
+      }
+    } else {
+      console.warn("Notification permission denied.");
+    }
+  } catch (error) {
+    console.error("Error getting FCM token:", error);
+  }
+};
+
+// ✅ Handle Incoming Messages (Foreground)
+if (messaging) {
+  onMessage(messaging, (payload) => {
+    console.log("Message received:", payload);
+    
+    // 🔹 Show a notification instead of alert (better UX)
+    new Notification(payload.notification.title, {
+      body: payload.notification.body,
+      icon: "/logo.png",
+    });
+  });
+}
+
+// ✅ Attach function to `window` for manual testing in browser console
+window.requestNotificationPermission = requestNotificationPermission;
+
+// ✅ Export Firebase Services
+export { 
+  auth, provider, signInWithPopup, createUserWithEmailAndPassword, db, 
+  messaging, requestNotificationPermission, addDoc, collection, getDocs, 
+  query, where, orderBy, serverTimestamp
+};
