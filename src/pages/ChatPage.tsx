@@ -11,12 +11,13 @@ const ChatPage = () => {
     const [messages, setMessages] = useState([]);
     const [newMessage, setNewMessage] = useState("");
     const [user, setUser] = useState(null);
+    const [loading, setLoading] = useState(true);
 
     // Fetch user from localStorage
     useEffect(() => {
         const fetchUserData = async () => {
             const userEmail = localStorage.getItem("userEmail");
-            const userName = localStorage.getItem("fullname"); // Assuming you store name in localStorage
+            const userName = localStorage.getItem("fullname"); 
 
             if (!userEmail) {
                 console.log("No user email found. Redirecting to login...");
@@ -49,6 +50,7 @@ const ChatPage = () => {
         const unsubscribe = onSnapshot(q, (querySnapshot) => {
             const fetchedMessages = querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
             setMessages(fetchedMessages);
+            setLoading(false);
         });
 
         return () => unsubscribe();
@@ -57,7 +59,6 @@ const ChatPage = () => {
     const sendMessage = async () => {
         if (!newMessage.trim()) {
             alert("Message cannot be empty!");
-            
             return;
         }
         if (!user) {
@@ -70,8 +71,8 @@ const ChatPage = () => {
             await addDoc(collection(db, "messages"), {
                 communityId,
                 text: newMessage,
-                senderName: user.displayName, // Store sender's name
-                senderEmail: user.email, // Optional for identifying users
+                senderName: user.displayName, 
+                senderEmail: user.email, 
                 timestamp: serverTimestamp(),
             });
             setNewMessage("");
@@ -97,11 +98,11 @@ const ChatPage = () => {
             const querySnapshot = await getDocs(q);
 
             if (!querySnapshot.empty) {
-                const docId = querySnapshot.docs[0].id; // Get the user's membership doc ID
-                await deleteDoc(doc(db, "community_members", docId)); // Remove user from the community
+                const docId = querySnapshot.docs[0].id; 
+                await deleteDoc(doc(db, "community_members", docId)); 
 
                 alert("You have left the community.");
-                navigate("/"); // Redirect to home page
+                navigate("/"); 
             } else {
                 navigate("/community");
             }
@@ -125,7 +126,13 @@ const ChatPage = () => {
 
             {/* Chat Messages Box */}
             <div className="border p-4 bg-white/10 h-96 overflow-y-auto bg-gray-100 rounded-md">
-                {messages.length > 0 ? (
+                {loading ? (
+                    <div className="animate-pulse space-y-2">
+                        <div className="h-6 bg-gray-300 rounded w-3/4"></div>
+                        <div className="h-6 bg-gray-300 rounded w-1/2"></div>
+                        <div className="h-6 bg-gray-300 rounded w-5/6"></div>
+                    </div>
+                ) : messages.length > 0 ? (
                     messages.map((msg) => (
                         <div key={msg.id} className={`p-2 border-b rounded-md my-1 ${msg.senderEmail === user?.email ? "bg-blue-100 text-right" : "bg-white text-left"}`}>
                             <p className="text-sm font-bold text-blue-600">{msg.senderName}</p>
