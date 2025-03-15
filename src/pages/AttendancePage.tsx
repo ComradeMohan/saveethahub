@@ -88,7 +88,7 @@ const AttendancePage = () => {
                 <div className="mt-4 text-white/80">
                   {percentage >= 80 ? (
                     <>
-                      <p>OK! You can miss up to {missableClasses} more classes.</p>
+                      <p>OK! You can bunk {missableClasses} more classes.</p>
                     </>
                   ) : (
                     <>
