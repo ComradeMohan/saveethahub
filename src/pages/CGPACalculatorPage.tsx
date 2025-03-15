@@ -28,6 +28,10 @@ const CGPACalculatorPage = () => {
   const [subjects, setSubjects] = useState([]);
   const [cgpa, setCGPA] = useState(0.0);
   const [userData, setUserData] = useState(null);
+  const [showARMSForm, setShowARMSForm] = useState(false);
+  const [armsUsername, setArmsUsername] = useState("");
+  const [armsPassword, setArmsPassword] = useState("");
+  const [fetchMessage, setFetchMessage] = useState("");
   const navigate = useNavigate();
 
   const gradePoints = { S: 10, A: 9, B: 8, C: 7, D: 6, E: 5 };
@@ -57,6 +61,11 @@ const CGPACalculatorPage = () => {
         if (data.grades) {
           setSubjects(data.grades);
           calculateCGPA(data.grades);
+        }
+        
+        // Set fetch message from Firestore if it exists
+        if (data.fetchMessage) {
+          setFetchMessage(data.fetchMessage);
         }
       }
     } catch (err) {
@@ -108,6 +117,39 @@ const CGPACalculatorPage = () => {
     }
   };
 
+  const handleARMSSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    const message = "Fetching grades from ARMS...";
+    setFetchMessage(message);
+    
+    if (userData) {
+      try {
+        const userRef = doc(db, "users", userData.id);
+        await updateDoc(userRef, {
+          armsUsername: armsUsername,
+          armsPassword: armsPassword,
+          fetchMessage: message // Save fetch message to Firestore
+        });
+      } catch (err) {
+        console.error("Error saving ARMS credentials:", err);
+        const errorMsg = "Error saving ARMS credentials";
+        setFetchMessage(errorMsg);
+        // Save error message to Firestore
+        if (userData) {
+          const userRef = doc(db, "users", userData.id);
+          await updateDoc(userRef, {
+            fetchMessage: errorMsg
+          });
+        }
+      }
+    }
+
+    // TODO: Implement ARMS integration logic here
+    setShowARMSForm(false);
+    setArmsUsername("");
+    setArmsPassword("");
+  };
+
   return (
     <div className="py-12">
       <div className="text-center mb-16">
@@ -146,7 +188,49 @@ const CGPACalculatorPage = () => {
           >
             Add Subject
           </button>
+          <div className="mt-4 flex flex-col gap-4">
+            <button
+              onClick={() => setShowARMSForm(true)}
+              className="w-full md:w-auto px-6 py-3 bg-blue-500 hover:bg-blue-600 text-white rounded-lg transition-colors"
+            >
+              Fetch from ARMS
+            </button>
 
+            {showARMSForm && (
+              <div className="bg-gray-800 p-6 rounded-lg">
+                <form onSubmit={handleARMSSubmit} className="space-y-4">
+                  <input
+                    type="text"
+                    value={armsUsername}
+                    onChange={(e) => setArmsUsername(e.target.value)}
+                    className="w-full p-3 border bg-white/10 border-gray-300 rounded-lg text-white"
+                    placeholder="ARMS Username"
+                    required
+                  />
+                  <input
+                    type="password"
+                    value={armsPassword}
+                    onChange={(e) => setArmsPassword(e.target.value)}
+                    className="w-full p-3 border bg-white/10 border-gray-300 rounded-lg text-white"
+                    placeholder="ARMS Password"
+                    required
+                  />
+                  <button
+                    type="submit"
+                    className="w-full px-6 py-3 bg-green-500 hover:bg-green-600 text-white rounded-lg transition-colors"
+                  >
+                    Submit
+                  </button>
+                </form>
+              </div>
+            )}
+
+            {fetchMessage && (
+              <div className="text-white text-center p-4 bg-gray-700/50 rounded-lg">
+                {fetchMessage}
+              </div>
+            )}
+          </div>
           <div className=" text-center">
             <h2 className="text-3xl font-bold text-white">
               Your CGPA: {cgpa.toFixed(2)}
