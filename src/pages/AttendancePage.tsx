@@ -101,12 +101,12 @@ const AttendancePage = () => {
           );
         })}
 
-        <button
+{/*         <button
           onClick={addSubject}
           className="w-full px-6 py-3 bg-teal-500 hover:bg-teal-600 text-white rounded-lg transition-colors"
         >
           Add Subject
-        </button>
+        </button> */}
       </div>
     </div>
   );
