@@ -1,6 +1,13 @@
 import React from 'react';
 
 const App: React.FC = () => {
+  const pdfLinks: { [key: string]: string } = {
+    Python: '/public/python.pdf',
+    Java: '/public/java.pdf',
+    'C++': '/public/cpp.pdf',
+    C: '/public/c.pdf',
+  };
+
   return (
     <div className="min-h-screen text-white">
       {/* Hero Section */}
@@ -21,39 +28,11 @@ const App: React.FC = () => {
         <div className="max-w-7xl mx-auto">
           <h2 className="text-3xl font-bold mb-8 text-center">Programming Languages</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {[
-              {
-                language: "Python",
-                icon: "fab fa-python",
-                color: "from-blue-500",
-                easy: 50,
-                medium: 30,
-                hard: 20,
-              },
-              {
-                language: "Java",
-                icon: "fab fa-java",
-                color: "from-red-500",
-                easy: 45,
-                medium: 35,
-                hard: 25,
-              },
-              {
-                language: "C++",
-                icon: "fas fa-code",
-                color: "from-purple-500",
-                easy: 40,
-                medium: 40,
-                hard: 20,
-              },
-              {
-                language: "C",
-                icon: "fas fa-copyright",
-                color: "from-green-500",
-                easy: 35,
-                medium: 35,
-                hard: 30,
-              },
+            {[ 
+              { language: "Python", icon: "fab fa-python", color: "from-blue-500", easy: 50, medium: 30, hard: 20 },
+              { language: "Java", icon: "fab fa-java", color: "from-red-500", easy: 45, medium: 35, hard: 25 },
+              { language: "C++", icon: "fas fa-code", color: "from-purple-500", easy: 40, medium: 40, hard: 20 },
+              { language: "C", icon: "fas fa-copyright", color: "from-green-500", easy: 35, medium: 35, hard: 30 },
             ].map((course, index) => (
               <div
                 key={index}
@@ -77,63 +56,19 @@ const App: React.FC = () => {
                     <span>{course.hard} questions</span>
                   </div>
                 </div>
-                <button className="mt-4 w-full bg-white bg-opacity-20 hover:bg-opacity-30 py-2 rounded-full font-semibold transition-colors">
+                <a
+                  href={pdfLinks[course.language]}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="mt-4 w-full block text-center bg-white bg-opacity-20 hover:bg-opacity-30 py-2 rounded-full font-semibold transition-colors"
+                >
                   Enroll Now
-                </button>
+                </a>
               </div>
             ))}
           </div>
         </div>
       </section>
-
-      {/* Advanced Topics Section */}
-      <section className="py-12 px-4 ">
-        <div className="max-w-7xl mx-auto">
-          <h2 className="text-3xl font-bold mb-8 text-center">Advanced Topics</h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {[
-              {
-                title: "Data Structures & Algorithms",
-                icon: "fas fa-sitemap",
-                duration: "12 weeks",
-                description: "Master data structures and algorithms for technical interviews.",
-              },
-              {
-                title: "Advanced Algorithms",
-                icon: "fas fa-microchip",
-                duration: "10 weeks",
-                description: "Dive deep into complex algorithmic challenges and optimization.",
-              },
-              {
-                title: "Web Development",
-                icon: "fas fa-globe",
-                duration: "16 weeks",
-                description: "Build modern, responsive web applications using cutting-edge tech.",
-              },
-            ].map((topic, index) => (
-              <div
-                key={index}
-                className="bg-gray-700 rounded-xl p-6 shadow-lg transform hover:scale-105 transition duration-300"
-              >
-                <div className="flex items-center mb-4">
-                  <i className={`${topic.icon} text-3xl text-teal-400`}></i>
-                  <h3 className="ml-4 text-xl font-bold">{topic.title}</h3>
-                </div>
-                <p className="text-gray-300 mb-4">{topic.description}</p>
-                <div className="flex items-center mb-6">
-                  <i className="far fa-clock text-teal-400 mr-2"></i>
-                  <span>{topic.duration}</span>
-                </div>
-                <button className="w-full bg-teal-500 hover:bg-teal-600 py-2 rounded-full font-semibold transition-colors">
-                  Learn More
-                </button>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-    
     </div>
   );
 };
