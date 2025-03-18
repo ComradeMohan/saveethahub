@@ -11,7 +11,6 @@ import {
     UserIcon,
     Gitlab,
 } from 'lucide-react';
-
 import Navbar from './components/Navbar';
 import HomePage from './pages/HomePage';
 import AcademicsPage from './pages/AcademicsPage';
@@ -19,7 +18,7 @@ import CGPACalculatorPage from './pages/CGPACalculatorPage';
 import AttendancePage from './pages/AttendancePage';
 import ConceptMapsPage from './pages/ConceptMapsPage';
 import SkillsPage from './pages/SkillsPage';
-import CertificationsPage from './pages/CertificationsPage';
+import LabsPage from './pages/LabsPage';
 import EventsPage from './pages/EventsPage';
 import ContactPage from './pages/ContactPage';
 import LoginPage from './pages/LoginPage';
@@ -28,7 +27,7 @@ import ProfilePage from './pages/ProfilePage';
 import Notification from './pages/NotificationPage';
 import Community from "./pages/CommunityPage"
 import ChatPage from "./pages/ChatPage";
-
+import PdfViewer from "./components/PdfViewer";
 const App: React.FC = () => {
     const [user, setUser] = useState<{ username: string; email?: string } | null>(null);
     const [isMenuOpen, setIsMenuOpen] = useState(false); // ✅ Added state for mobile menu
@@ -39,6 +38,7 @@ const App: React.FC = () => {
             setUser(JSON.parse(storedUser));
         }
     }, []);
+
 
     const handleSetUser = (userData: { username: string; email?: string }) => {
         setUser(userData);
@@ -55,7 +55,7 @@ const App: React.FC = () => {
         { title: 'CGPA Calculator', icon: Calculator, path: '/cgpa-calculator' },
         { title: 'Attendance', icon: Clock, path: '/attendance' },
         { title: 'Concept Maps', icon: Compass, path: '/concept-maps' },
-        { title: 'Labs', icon: Gitlab, path: '/certifications' },
+        { title: 'Labs', icon: Gitlab, path: '/labspage' },
         { title: 'Events', icon: Calendar, path: '/events' },
         { title: 'Contact', icon: MessageSquare, path: '/contact' },
         {
@@ -82,8 +82,9 @@ const App: React.FC = () => {
                         <Route path="/concept-maps" element={<ConceptMapsPage />} />
                         <Route path='/notification' element={<Notification />} />
                         <Route path="/skills" element={<SkillsPage />} />
-                        <Route path="/certifications" element={<CertificationsPage />} />
+                        <Route path="/labspage" element={<LabsPage />} />
                         <Route path="/events" element={<EventsPage />} />
+                        <Route path="/pdf-viewer" element={<PdfViewer />} />
                         <Route path="/contact" element={<ContactPage />} />
                         <Route path="/community" element={<Community />} />
                 <Route path="/chat/:communityId" element={<ChatPage />} />
