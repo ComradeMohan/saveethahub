@@ -77,7 +77,7 @@ const ConceptMapsPage = () => {
             </div>
             <div className="grid grid-cols-2 gap-3">
               {subject.topics.map((topic, topicIndex) => (
-                <a key={topicIndex} href={topic.link} target="_blank" rel="noopener noreferrer">
+                <a key={topicIndex} href={topic.link} >
                   <button
                     className="bg-white/10 hover:bg-white/20 text-white rounded-lg p-3 text-sm transition-colors w-full"
                   >
