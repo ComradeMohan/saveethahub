@@ -3,10 +3,10 @@ import { Link } from "react-router-dom";
 
 const App: React.FC = () => {
   const pdfLinks: { [key: string]: string } = {
-    Python: '/public/python.pdf',
-    Java: '/public/java.pdf',
-    Cpp: '/public/cpp.pdf',
-    C: '/public/c.pdf',
+    Python: '/python.pdf',
+    Java: '/java.pdf',
+    Cpp: '/cpp.pdf',
+    C: '/c.pdf',
   };
 
   return (
