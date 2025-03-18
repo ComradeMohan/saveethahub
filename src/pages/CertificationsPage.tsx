@@ -1,10 +1,11 @@
 import React from 'react';
+import { Link } from "react-router-dom";
 
 const App: React.FC = () => {
   const pdfLinks: { [key: string]: string } = {
     Python: '/public/python.pdf',
     Java: '/public/java.pdf',
-    'C++': '/public/cpp.pdf',
+    Cpp: '/public/cpp.pdf',
     C: '/public/c.pdf',
   };
 
@@ -31,7 +32,7 @@ const App: React.FC = () => {
             {[ 
               { language: "Python", icon: "fab fa-python", color: "from-blue-500", easy: 50, medium: 30, hard: 20 },
               { language: "Java", icon: "fab fa-java", color: "from-red-500", easy: 45, medium: 35, hard: 25 },
-              { language: "C++", icon: "fas fa-code", color: "from-purple-500", easy: 40, medium: 40, hard: 20 },
+              { language: "Cpp", icon: "fas fa-code", color: "from-purple-500", easy: 40, medium: 40, hard: 20 },
               { language: "C", icon: "fas fa-copyright", color: "from-green-500", easy: 35, medium: 35, hard: 30 },
             ].map((course, index) => (
               <div
@@ -56,14 +57,12 @@ const App: React.FC = () => {
                     <span>{course.hard} questions</span>
                   </div>
                 </div>
-                <a
-                  href={pdfLinks[course.language]}
-                  target="_blank"
-                  rel="noopener noreferrer"
+                <Link
+                  to={`/pdf-viewer?file=${encodeURIComponent(pdfLinks[course.language])}`}
                   className="mt-4 w-full block text-center bg-white bg-opacity-20 hover:bg-opacity-30 py-2 rounded-full font-semibold transition-colors"
                 >
                   Enroll Now
-                </a>
+                </Link>
               </div>
             ))}
           </div>
