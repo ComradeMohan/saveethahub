@@ -4,7 +4,7 @@ import { useLocation } from "react-router-dom";
 const PdfViewer: React.FC = () => {
   const location = useLocation();
   const params = new URLSearchParams(location.search);
-  const pdfUrl = params.get("file");
+  let pdfUrl = params.get("file");
 
   if (!pdfUrl) {
     return (
@@ -14,10 +14,11 @@ const PdfViewer: React.FC = () => {
     );
   }
 
+  // Append #toolbar=0 to disable the download option
+  pdfUrl += "#toolbar=0";
+
   return (
-    <div className="h-screen flex  flex-col">
-      {/* Navbar */}
-   
+    <div className="h-screen flex flex-col">
       {/* PDF Display */}
       <iframe
         src={pdfUrl}
