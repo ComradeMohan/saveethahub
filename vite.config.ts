@@ -1,22 +1,15 @@
-import { defineConfig } from "vite";
-import react from "@vitejs/plugin-react";
+import { defineConfig } from 'vite';
+import react from '@vitejs/plugin-react';
 
+// https://vitejs.dev/config/
 export default defineConfig({
-  plugins: [
-    react({
-      jsxRuntime: "automatic", // Ensure JSX runtime compatibility
-    }),
-  ],
-  optimizeDeps: {
-    include: ["pdfjs-dist"],
-    exclude: ["lucide-react"], // Prevent Vite from trying to optimize it
-  },
+  plugins: [react()],
+  base: './',  // Ensures relative paths in production
   build: {
-    commonjsOptions: {
-      include: [/node_modules/, /pdfjs-dist/], // Ensure dependencies are handled properly
-    },
-    rollupOptions: {
-      external: ["react", "react-dom"], // Prevent Rollup bundling issues
-    },
+    outDir: 'dist', // Ensure it matches Netlify's "publish" directory
   },
+  server: {
+    port: 3000, // Adjust if needed
+    open: true, // Auto open browser on start
+  }
 });
