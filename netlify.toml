@@ -1,15 +1,15 @@
 [[redirects]]
-  from = "/"
+  from = "/*"
   to = "/index.html"
   status = 200
 
 [build]
   command = "npm install --legacy-peer-deps && npm run build"
-  publish = "dist"  # If using Vite
-  # publish = "build"  # If using Create React App
+  publish = "dist"  # Use "build" if it's Create React App
 
 [functions]
   directory = "netlify/functions"
+
 [[headers]]
   for = "/*.pdf"
   [headers.values]
@@ -19,5 +19,5 @@
 [[headers]]
   for = "/.netlify/functions/*"
   [headers.values]
-    Content-Security-Policy = "default-src 'none'"
+    Content-Security-Policy = "default-src 'self'; script-src 'self'; style-src 'self'; connect-src 'self'"
     X-Frame-Options = "DENY"
