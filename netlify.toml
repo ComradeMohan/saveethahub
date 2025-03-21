@@ -2,22 +2,3 @@
   from = "/*"
   to = "/index.html"
   status = 200
-
-[build]
-  command = "npm install --legacy-peer-deps && npm run build"
-  publish = "dist"  # Use "build" if it's Create React App
-
-[functions]
-  directory = "netlify/functions"
-
-[[headers]]
-  for = "/*.pdf"
-  [headers.values]
-    X-Robots-Tag = "none"
-    Cache-Control = "no-store"
-
-[[headers]]
-  for = "/.netlify/functions/*"
-  [headers.values]
-    Content-Security-Policy = "default-src 'self'; script-src 'self'; style-src 'self'; connect-src 'self'"
-    X-Frame-Options = "DENY"
