@@ -1,10 +1,12 @@
 import React from "react";
 import { useLocation } from "react-router-dom";
+import { Viewer, Worker } from "@react-pdf-viewer/core";
+import "@react-pdf-viewer/core/lib/styles/index.css";
 
 const PdfViewer: React.FC = () => {
   const location = useLocation();
   const params = new URLSearchParams(location.search);
-  let pdfUrl = params.get("file");
+  const pdfUrl = params.get("file");
 
   if (!pdfUrl) {
     return (
@@ -14,17 +16,11 @@ const PdfViewer: React.FC = () => {
     );
   }
 
-  // Append #toolbar=0 to disable the download option
-  pdfUrl += "#toolbar=0";
-
   return (
-    <div className="h-screen flex flex-col">
-      {/* PDF Display */}
-      <iframe
-        src={pdfUrl}
-        className="flex-1 w-full pt-9 h-full"
-        title="PDF Viewer"
-      ></iframe>
+    <div className="h-screen pt-10 flex flex-col">
+      <Worker workerUrl={`https://unpkg.com/pdfjs-dist@3.11.174/build/pdf.worker.min.js`}>
+        <Viewer fileUrl={pdfUrl} />
+      </Worker>
     </div>
   );
 };
