@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { motion, useInView } from "framer-motion";
 import { collection, getDocs, query, where, doc, updateDoc, arrayUnion } from "firebase/firestore";
 import { db } from "../firebase";
