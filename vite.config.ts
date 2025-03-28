@@ -3,12 +3,17 @@ import react from '@vitejs/plugin-react';
 
 export default defineConfig({
   plugins: [react()],
+  esbuild: {
+    jsxInject: `import React from 'react'`,
+    jsxFactory: 'React.createElement',
+    jsxFragment: 'React.Fragment',
+  },
   optimizeDeps: {
     include: ['pdfjs-dist'],
   },
   build: {
     rollupOptions: {
-      external: ['react'], // Ensure React is treated as an external dependency
+      external: ['react'],
     },
     commonjsOptions: {
       include: [/pdfjs-dist/],
