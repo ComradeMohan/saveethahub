@@ -28,6 +28,8 @@ import Notification from './pages/NotificationPage';
 import Community from "./pages/CommunityPage"
 import ChatPage from "./pages/ChatPage";
 import PdfViewer from "./components/PdfViewer";
+import ProblemPage from './ProblemPage';
+
 const App: React.FC = () => {
     const [user, setUser] = useState<{ username: string; email?: string } | null>(null);
     const [isMenuOpen, setIsMenuOpen] = useState(false); // ✅ Added state for mobile menu
@@ -87,7 +89,8 @@ const App: React.FC = () => {
                         <Route path="/pdf-viewer" element={<PdfViewer />} />
                         <Route path="/contact" element={<ContactPage />} />
                         <Route path="/community" element={<Community />} />
-                <Route path="/chat/:communityId" element={<ChatPage />} />
+                        <Route path="/chat/:communityId" element={<ChatPage />} />
+                        <Route path="/labs/:language/:problemId" element={<ProblemPage />} />
                         <Route path="/" element={<Navigate to="/home" replace />} />
                     </Routes>
                 </main>
