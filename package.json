@@ -27,7 +27,7 @@
     "lucide-react": "^0.446.0",
     "netlify-identity-widget": "^1.9.2",
     "pdf-lib": "^1.17.1",
-    "pdfjs-dist": "^4.7.432",
+   "pdfjs-dist": "^3.11.174",
     "puppeteer": "^24.4.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
