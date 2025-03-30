@@ -1,6 +1,7 @@
 {
   "compilerOptions": {
     "jsx": "react-jsx",
+     "jsxImportSource": "react",
     "strict": true,
     "moduleResolution": "node",
     "esModuleInterop": true,
