@@ -1,4 +1,5 @@
 import React from 'react';
+import { jsx as _jsx } from "react/jsx-runtime"; 
 import { Menu, X, GraduationCap } from 'lucide-react';
 import { Link, useLocation } from 'react-router-dom';
 
