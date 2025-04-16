@@ -1,7 +1,7 @@
-# Student Hub
+# Saveetha Hub
 
 
-Student Hub is an all-in-one academic companion designed to streamline student life. From CGPA calculations to attendance tracking and skill development courses, this platform provides essential tools for academic success.
+Saveetha Hub is an all-in-one academic companion designed to streamline student life. From CGPA calculations to attendance tracking and skill development courses, this platform provides essential tools for academic success.
 
 ## Features
 
@@ -21,34 +21,19 @@ Student Hub is an all-in-one academic companion designed to streamline student l
 
 ## Tech Stack
 
-### Frontend  
-<p align="left">
-  <img src="https://upload.wikimedia.org/wikipedia/commons/6/61/HTML5_logo_and_wordmark.svg" alt="HTML5" width="50" height="50"/>
-  <img src="https://upload.wikimedia.org/wikipedia/commons/d/d5/CSS3_logo_and_wordmark.svg" alt="CSS3" width="50" height="50"/>
-  <img src="https://upload.wikimedia.org/wikipedia/commons/6/6a/JavaScript-logo.png" alt="JavaScript" width="50" height="50"/>
-  <img src="https://upload.wikimedia.org/wikipedia/commons/a/a7/React-icon.svg" alt="React" width="50" height="50"/>
-</p>
-
-### Backend  
-<p align="left">
-  <img src="https://upload.wikimedia.org/wikipedia/commons/3/37/Firebase_Logo.svg" alt="Firebase" width="100" height="50"/>
-</p>
-
-### Hosting  
-<p align="left">
-  <img src="https://upload.wikimedia.org/wikipedia/commons/b/b8/Netlify_logo.svg" alt="Netlify" width="100" height="50"/>
-</p>
-
+- **Frontend:** HTML, CSS, JavaScript, React.js
+- **Backend:** Firebase (Authentication & Database)
+- **Hosting:** Netlify
 
 ## Installation & Development
 
 1. Clone the repository:
    ```bash
-   [git clone https://github.com/ComradeMohan/saveethahub.git](https://github.com/KALYANMP/studenthub2.git)
+   git clone https://github.com/ComradeMohan/saveethahub.git
    ```
 2. Navigate to the project directory:
    ```bash
-   cd studenthub2
+   cd saveethahub
    ```
 3. Install dependencies:
    ```bash

@@ -1,12 +1,4 @@
 {
-  "compilerOptions": {
-    "jsx": "react-jsx",
-     "jsxImportSource": "react",
-    "strict": true,
-    "moduleResolution": "node",
-    "esModuleInterop": true,
-    "skipLibCheck": true
-  },
   "files": [],
   "references": [
     { "path": "./tsconfig.app.json" },
