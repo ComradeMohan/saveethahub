@@ -1,5 +1,5 @@
-import React from 'react';
 import { Compass, Network, Brain, Lightbulb } from 'lucide-react';
+import { Link } from "react-router-dom";
 
 const ConceptMapsPage = () => {
   const subjects = [
@@ -77,13 +77,11 @@ const ConceptMapsPage = () => {
             </div>
             <div className="grid grid-cols-2 gap-3">
               {subject.topics.map((topic, topicIndex) => (
-                <a key={topicIndex} href={topic.link} target="_blank" rel="noopener noreferrer">
-                  <button
-                    className="bg-white/10 hover:bg-white/20 text-white rounded-lg p-3 text-sm transition-colors w-full"
-                  >
-                    {topic.name}
-                  </button>
-                </a>
+                <Link key={topicIndex} to={`/pdf-viewer?file=${encodeURIComponent(topic.link)}`}>
+                <button className="bg-white/10 hover:bg-white/20 text-white rounded-lg p-3 text-sm transition-colors w-full">
+                  {topic.name}
+                </button>
+              </Link>
               ))}
             </div>
           </div>
