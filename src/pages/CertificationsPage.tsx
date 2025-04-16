@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from "react-router-dom";
 
 const App: React.FC = () => {
   return (
@@ -29,6 +30,7 @@ const App: React.FC = () => {
                 easy: 50,
                 medium: 30,
                 hard: 20,
+                pdf: "/Python.pdf",
               },
               {
                 language: "Java",
@@ -37,6 +39,7 @@ const App: React.FC = () => {
                 easy: 45,
                 medium: 35,
                 hard: 25,
+                pdf: "/java.pdf",
               },
               {
                 language: "C++",
@@ -45,6 +48,7 @@ const App: React.FC = () => {
                 easy: 40,
                 medium: 40,
                 hard: 20,
+                pdf: "/cpp.pdf",
               },
               {
                 language: "C",
@@ -53,6 +57,7 @@ const App: React.FC = () => {
                 easy: 35,
                 medium: 35,
                 hard: 30,
+                pdf: "/c.pdf",
               },
             ].map((course, index) => (
               <div
@@ -77,9 +82,11 @@ const App: React.FC = () => {
                     <span>{course.hard} questions</span>
                   </div>
                 </div>
-                <button className="mt-4 w-full bg-white bg-opacity-20 hover:bg-opacity-30 py-2 rounded-full font-semibold transition-colors">
-                  Enroll Now
-                </button>
+                <Link to={`/pdf-viewer?file=${encodeURIComponent(course.pdf)}`}>
+  <button className="mt-4 w-full bg-white bg-opacity-20 hover:bg-opacity-30 py-2 rounded-full font-semibold transition-colors">
+    Enroll Now {course.language}
+  </button>
+</Link>
               </div>
             ))}
           </div>
