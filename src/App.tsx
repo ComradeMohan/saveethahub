@@ -28,6 +28,7 @@ import ProfilePage from './pages/ProfilePage';
 import Notification from './pages/NotificationPage';
 import Community from "./pages/CommunityPage"
 import ChatPage from "./pages/ChatPage";
+import PdfViewer from "./components/PdfViewer";
 
 const App: React.FC = () => {
     const [user, setUser] = useState<{ username: string; email?: string } | null>(null);
@@ -81,6 +82,7 @@ const App: React.FC = () => {
                         <Route path="/attendance" element={<AttendancePage />} />
                         <Route path="/concept-maps" element={<ConceptMapsPage />} />
                         <Route path='/notification' element={<Notification />} />
+                        <Route path="/pdf-viewer" element={<PdfViewer />} />
                         <Route path="/skills" element={<SkillsPage />} />
                         <Route path="/certifications" element={<CertificationsPage />} />
                         <Route path="/events" element={<EventsPage />} />
