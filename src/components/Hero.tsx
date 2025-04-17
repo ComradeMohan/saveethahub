@@ -53,9 +53,9 @@ const Hero = () => {
               {[
                 {
                   icon: BookOpen,
-                  title: 'Learning Resources',
-                  desc: 'Interactive Concept Maps',
-                  path: '/concept-maps'
+                  title: 'Community',
+                  desc: 'Interactive Groups',
+                  path: '/community'
                 },
                 {
                   icon: Award,
@@ -72,9 +72,9 @@ const Hero = () => {
                 
                 {
                   icon: Group,
-                  title: '',
-                  desc: 'CGPA & Attendance Calculators',
-                  path: '/community'
+                  title: 'Portfolios',
+                  desc: 'Get inspirations from developers',
+                  path: '/portfolios'
                 }
               ].map((item, index) => (
                 <Link
