@@ -84,7 +84,7 @@ const App: React.FC = () => {
                 </div>
                 <Link to={`/pdf-viewer?file=${encodeURIComponent(course.pdf)}`}>
   <button className="mt-4 w-full bg-white bg-opacity-20 hover:bg-opacity-30 py-2 rounded-full font-semibold transition-colors">
-    Enroll Now python
+    Enroll Now {course.language}
   </button>
 </Link>
               </div>

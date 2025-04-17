@@ -19,7 +19,7 @@ import CGPACalculatorPage from './pages/CGPACalculatorPage';
 import AttendancePage from './pages/AttendancePage';
 import ConceptMapsPage from './pages/ConceptMapsPage';
 import SkillsPage from './pages/SkillsPage';
-import CertificationsPage from './pages/CertificationsPage';
+import CertificationsPage from './pages/labs';
 import EventsPage from './pages/EventsPage';
 import ContactPage from './pages/ContactPage';
 import LoginPage from './pages/LoginPage';
@@ -29,6 +29,9 @@ import Notification from './pages/NotificationPage';
 import Community from "./pages/CommunityPage"
 import ChatPage from "./pages/ChatPage";
 import PdfViewer from "./components/PdfViewer";
+import ATS from './pages/ATS';
+import internship from './pages/InternshipPage';
+import InternshipPage from './pages/InternshipPage';
 
 const App: React.FC = () => {
     const [user, setUser] = useState<{ username: string; email?: string } | null>(null);
@@ -82,9 +85,11 @@ const App: React.FC = () => {
                         <Route path="/attendance" element={<AttendancePage />} />
                         <Route path="/concept-maps" element={<ConceptMapsPage />} />
                         <Route path='/notification' element={<Notification />} />
-                        <Route path="/pdf-viewer" element={<PdfViewer />} />
                         <Route path="/skills" element={<SkillsPage />} />
                         <Route path="/certifications" element={<CertificationsPage />} />
+                        <Route path='/internship' element={<InternshipPage />} />
+                        <Route path="/pdf-viewer" element={<PdfViewer />} />
+                        <Route path='/ATS' element={<ATS />}/>
                         <Route path="/events" element={<EventsPage />} />
                         <Route path="/contact" element={<ContactPage />} />
                         <Route path="/community" element={<Community />} />

@@ -1,5 +1,4 @@
-import React from 'react';
-import { GraduationCap, BookOpen, Award, Calendar,Group } from 'lucide-react';
+import {  BookOpen, Award, Calendar,Group } from 'lucide-react';
 import { Link, useNavigate } from 'react-router-dom';
 
 // Separate GetStartedButton component
@@ -66,9 +65,9 @@ const Hero = () => {
                 },
                 {
                   icon: Calendar,
-                  title: 'Events',
-                  desc: 'Stay Updated with Activities',
-                  path: '/events'
+                  title: 'Ats Score Checker',
+                  desc: 'Check your resume',
+                  path: '/internship'
                 },
                 
                 {
