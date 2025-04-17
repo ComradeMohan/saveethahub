@@ -65,8 +65,8 @@ const Hero = () => {
                 },
                 {
                   icon: Calendar,
-                  title: 'Ats Score Checker',
-                  desc: 'Check your resume',
+                  title: 'Internships',
+                  desc: 'Find your next job',
                   path: '/internship'
                 },
                 
