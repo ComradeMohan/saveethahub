@@ -15,13 +15,13 @@ const FilterSection: React.FC<FilterSectionProps> = ({
   availableRoles,
 }) => {
   return (
-    <div className="bg-white p-6 rounded-lg shadow-md mb-8">
-      <h2 className="text-xl font-bold text-gray-800 mb-4">Filter Opportunities</h2>
+    <div className="bg-slate-800 p-6 rounded-lg shadow-md mb-8">
+      <h2 className="text-xl font-bold text-white mb-4">Filter Opportunities</h2>
       
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
         {/* Role Filter */}
         <div>
-          <label htmlFor="role" className="block text-sm font-medium text-gray-700 mb-1">
+          <label htmlFor="role" className="block text-sm font-medium text-gray-300 mb-1">
             Role
           </label>
           <div className="relative">
@@ -29,7 +29,7 @@ const FilterSection: React.FC<FilterSectionProps> = ({
               id="role"
               value={filterOptions.role}
               onChange={(e) => handleFilterChange('role', e.target.value)}
-              className="block w-full pl-3 pr-10 py-2 text-base border border-gray-300 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm rounded-md"
+              className="block w-full pl-3 pr-10 py-2 text-base bg-slate-700 text-white border border-gray-300 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm rounded-md"
             >
               <option value="">All Roles</option>
               {availableRoles.map((role) => (
@@ -52,7 +52,7 @@ const FilterSection: React.FC<FilterSectionProps> = ({
 
         {/* Location Filter */}
         <div>
-          <label htmlFor="location" className="block text-sm font-medium text-gray-700 mb-1">
+          <label htmlFor="location" className="block text-sm font-medium text-gray-300 mb-1">
             Location
           </label>
           <div className="relative">
@@ -60,7 +60,7 @@ const FilterSection: React.FC<FilterSectionProps> = ({
               id="location"
               value={filterOptions.location}
               onChange={(e) => handleFilterChange('location', e.target.value)}
-              className="block w-full pl-3 pr-10 py-2 text-base border border-gray-300 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm rounded-md"
+              className="block w-full pl-3 pr-10 py-2 text-base bg-slate-700 text-white border border-gray-300 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm rounded-md"
             >
               <option value="">All Locations</option>
               {availableLocations.map((location) => (
@@ -83,7 +83,7 @@ const FilterSection: React.FC<FilterSectionProps> = ({
 
         {/* Type Filter (Internship/Job) */}
         <div>
-          <label htmlFor="type" className="block text-sm font-medium text-gray-700 mb-1">
+          <label htmlFor="type" className="block text-sm font-medium text-gray-300 mb-1">
             Type
           </label>
           <div className="relative">
@@ -91,7 +91,7 @@ const FilterSection: React.FC<FilterSectionProps> = ({
               id="type"
               value={filterOptions.type}
               onChange={(e) => handleFilterChange('type', e.target.value)}
-              className="block w-full pl-3 pr-10 py-2 text-base border border-gray-300 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm rounded-md"
+              className="block w-full pl-3 pr-10 py-2 text-base bg-slate-700 text-white border border-gray-300 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm rounded-md"
             >
               <option value="all">All Types</option>
               <option value="internship">Internships</option>
