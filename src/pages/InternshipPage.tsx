@@ -17,7 +17,7 @@ const InternshipPage: React.FC = () => {
     location: '',
     type: 'all', // 'all', 'internship', 'job'
   });
-  
+
   // Available locations and roles for filter dropdowns
   const [availableLocations, setAvailableLocations] = useState<string[]>([]);
   const [availableRoles, setAvailableRoles] = useState<string[]>([]);
@@ -30,14 +30,14 @@ const InternshipPage: React.FC = () => {
         const data = await fetchInternships();
         setInternships(data);
         setFilteredInternships(data);
-        
+
         // Extract unique locations and roles for filters
         const locations = [...new Set(data.map(item => item.location))];
         const roles = [...new Set(data.map(item => item.role))];
-        
+
         setAvailableLocations(locations);
         setAvailableRoles(roles);
-        
+
         setIsLoading(false);
       } catch {
         setError('Failed to fetch internships. Please try again later.');
@@ -74,63 +74,64 @@ const InternshipPage: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen pt-10  from-blue-50 to-white">
-            <div className="container bg-gradient-to-b mx-auto px-4 py-8">
-        <div className="text-center mb-10">
-          <h1 className="text-4xl font-bold text-blue-800 mb-2">Internships & Jobs</h1>
-          <p className="text-lg text-gray-600">
-            Find the perfect internship or job opportunity to kickstart your career
-          </p>
+    <div className="min-h-screen  text-white pt-10">
+  <div className="container mx-auto px-4 py-8">
+    <div className="text-center mb-10">
+      <h1 className="text-4xl font-bold text-blue-300 mb-2">Internships & Jobs</h1>
+      <p className="text-lg text-gray-300">
+        Find the perfect internship or job opportunity to kickstart your career
+      </p>
+    </div>
+
+    <FilterSection 
+      filterOptions={filterOptions}
+      handleFilterChange={handleFilterChange}
+      availableLocations={availableLocations}
+      availableRoles={availableRoles}
+    />
+
+    {isLoading ? (
+      <div className="flex justify-center items-center h-64">
+        <Spinner />
+      </div>
+    ) : error ? (
+      <div className="text-center p-10 bg-white/10 backdrop-blur-md rounded-lg border border-red-400">
+        <p className="text-red-400">{error}</p>
+        <button 
+          className="mt-4 px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700"
+          onClick={() => window.location.reload()}
+        >
+          Try Again
+        </button>
+      </div>
+    ) : (
+      <>
+        <div className="mb-4 text-gray-400">
+          {filteredInternships.length} opportunities found
         </div>
-
-        <FilterSection 
-          filterOptions={filterOptions}
-          handleFilterChange={handleFilterChange}
-          availableLocations={availableLocations}
-          availableRoles={availableRoles}
-        />
-
-        {isLoading ? (
-          <div className="flex justify-center items-center h-64">
-            <Spinner />
-          </div>
-        ) : error ? (
-          <div className="text-center p-10 bg-red-50 rounded-lg">
-            <p className="text-red-600">{error}</p>
+        
+        {filteredInternships.length === 0 ? (
+          <div className="text-center p-10 bg-white/10 backdrop-blur-md rounded-lg border border-gray-700">
+            <p className="text-gray-400">No internships or jobs found matching your filters.</p>
             <button 
               className="mt-4 px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700"
-              onClick={() => window.location.reload()}
+              onClick={() => setFilterOptions({ role: '', location: '', type: 'all' })}
             >
-              Try Again
+              Clear Filters
             </button>
           </div>
         ) : (
-          <>
-            <div className="mb-4 text-gray-600">
-              {filteredInternships.length} opportunities found
-            </div>
-            
-            {filteredInternships.length === 0 ? (
-              <div className="text-center p-10 bg-gray-50 rounded-lg">
-                <p className="text-gray-600">No internships or jobs found matching your filters.</p>
-                <button 
-                  className="mt-4 px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700"
-                  onClick={() => setFilterOptions({ role: '', location: '', type: 'all' })}
-                >
-                  Clear Filters
-                </button>
-              </div>
-            ) : (
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                {filteredInternships.map((internship) => (
-                  <InternshipCard key={internship.id} internship={internship} />
-                ))}
-              </div>
-            )}
-          </>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {filteredInternships.map((internship) => (
+              <InternshipCard key={internship.id} internship={internship} />
+            ))}
+          </div>
         )}
-      </div>
-    </div>
+      </>
+    )}
+  </div>
+</div>
+
   );
 };
 
