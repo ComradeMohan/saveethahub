@@ -51,7 +51,7 @@ const CourseEnrollmentAlert = () => {
     formData.append("phoneNumber", phoneNumber);
   
     try {
-      const response = await fetch("https://getform.io/f/bgdprlja", {
+      const response = await fetch("https://getform.io/f/bllykzwb", {
         method: "POST",
         body: formData,
         headers: {
