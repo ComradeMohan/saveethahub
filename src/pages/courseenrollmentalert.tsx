@@ -180,7 +180,7 @@ const CourseEnrollmentAlert = () => {
                     id="slotLetter"
                     value={slotLetter}
                     onChange={(e) => setSlotLetter(e.target.value)}
-                    className="pl-10 block w-full pr-3 py-3 border border-green-300 rounded-md bg-white/5  shadow-sm focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-indigo-500 transition duration-150 text-white "
+                    className="pl-10 block w-full pr-3 py-3 border border-grey-300 rounded-md bg-white/5  shadow-sm focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-indigo-500 transition duration-150 text-white "
                   >
                     {Array.from({ length: 26 }, (_, i) => String.fromCharCode(65 + i)).map((letter) => (
                      <option
