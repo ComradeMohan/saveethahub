@@ -83,7 +83,15 @@ const Hero = () => {
                   className="p-6 bg-white/10 backdrop-blur-lg rounded-xl hover:transform hover:-translate-y-1 transition-all duration-300"
                 >
                   <item.icon className="h-8 w-8 text-teal-400 mb-4" />
-                  <h3 className="text-lg font-semibold text-white mb-2">{item.title}</h3>
+                  <h3 className="text-lg font-semibold text-white mb-2 flex items-center gap-2">
+  {item.title}
+  {item.title === 'Course Enrollment Alert System' && (
+    <span className="px-2 py-0.5 text-xs font-bold text-red-600 bg-white/90 rounded animate-pulse">
+      NEW
+    </span>
+  )}
+</h3>
+
                   <p className="text-white/70 text-sm">{item.desc}</p>
                 </Link>
               ))}
