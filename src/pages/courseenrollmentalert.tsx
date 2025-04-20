@@ -115,15 +115,7 @@ const CourseEnrollmentAlert = () => {
                 <div className="ml-3">
                   <p className="text-sm font-medium">{message}</p>
                 </div>
-                <button
-  type="submit"
-  disabled={isLoading}
-  className={`w-full flex justify-center py-3 px-4 border border-transparent rounded-md shadow-sm text-white font-medium bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition duration-150 ${
-    isLoading ? "opacity-50 cursor-not-allowed" : ""
-  }`}
->
-  {isLoading ? "Submitting..." : "Set Alert"}
-</button>
+
 
               </div>
             )}
@@ -226,7 +218,7 @@ const CourseEnrollmentAlert = () => {
                     maxLength={10}
                     className={`pl-10 block w-full pr-3 py-3 border ${
                       touched.phoneNumber && !validatePhoneNumber(phoneNumber)
-                        ? "border-red-300 text-red-900 placeholder-red-300 focus:ring-red-500 bg-white/5 focus:border-red-500"
+                        ? ""
                         : "border-gray-300 focus:ring-green-500 focus:border-green-500"
                     } rounded-md bg-white/5 text-white shadow-sm placeholder-gray-400 focus:outline-none focus:ring-2 transition duration-150`}
                     required
