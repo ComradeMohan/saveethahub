@@ -20,16 +20,14 @@ const Navbar: React.FC<NavbarProps> = ({ items, isMenuOpen, setIsMenuOpen }) => 
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-16">
           <Link to="/" className="flex items-center space-x-2">
-            <svg width="70" height="40" viewBox="0 0 10 55" xmlns="http://www.w3.org/2000/svg">
+                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 55 35" width="45" height="35">
   <defs>
     <linearGradient id="textGradient" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0%" stop-color="#2af598"/>
-      <stop offset="100%" stop-color="#009efd"/>
+      <stop offset="0%" stop-color="#2af598" />
+      <stop offset="100%" stop-color="#009efd" />
     </linearGradient>
   </defs>
-  <text x="0" y="45" font-size="40" font-family="Arial, sans-serif" font-weight="bold" fill="url(#textGradient)">
-    SH
-  </text>
+  <text x="0" y="35" font-size="40" font-family="Arial, sans-serif" font-weight="bold" fill="url(#textGradient)">SH</text>
 </svg>
 {/*             <GraduationCap className="h-8 w-8 text-white" /> */}
             <span className="text-xl font-bold text-white">Saveetha Hub</span>
