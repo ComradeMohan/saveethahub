@@ -65,10 +65,10 @@ const Portfolio: React.FC = () => {
           {portfolioLinks.map((link, index) => (
             <div
               key={index}
-              className="relative group bg-white rounded-lg shadow-lg overflow-hidden border-2 border-transparent"
+              className="relative group bg-[#00000078] rounded-lg shadow-lg overflow-hidden border-2 border-transparent"
             >
               <div className="portfolio-header p-2">
-                <h2 className="text-xl font-semibold">{link.name}</h2>
+                <h2 className="text-xl font-semibold text-white">{link.name}</h2>
               </div>
 
               <div className="iframe-container p-4 relative">
