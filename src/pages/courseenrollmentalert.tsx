@@ -241,7 +241,7 @@ const CourseEnrollmentAlert = () => {
                 <button
                   type="submit"
                   disabled={isLoading}
-                  className={`w-full flex justify-center items-center px-4 py-3 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-[#19b06c] hover:bg-[#0a7247] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition duration-150 ${
+                  className={`w-full flex justify-center items-center px-4 py-3 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-[#0a7247] hover:bg-[#19b06c]  focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition duration-150 ${
                     isLoading ? "opacity-70 cursor-not-allowed" : ""
                   }`}
                 >
