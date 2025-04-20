@@ -81,8 +81,8 @@ const CourseEnrollmentAlert = () => {
   return (
     <div className="min-h-screen  from-blue-50 to-indigo-100 py-12 px-4 sm:px-6 lg:px-8 flex items-center justify-center">
       <div className="w-full max-w-md">
-        <div className="bg-white rounded-xl shadow-2xl overflow-hidden">
-          <div className="bg-gradient-to-r from-blue-600 to-indigo-700 px-6 py-5">
+        <div className=" rounded-xl shadow-2xl overflow-hidden">
+          <div className=" px-6 py-5">
             <h2 className="text-2xl font-extrabold text-white flex items-center">
               <svg xmlns="http://www.w3.org/2000/svg" className="h-7 w-7 mr-2" viewBox="0 0 20 20" fill="currentColor">
                 <path d="M10.394 2.08a1 1 0 00-.788 0l-7 3a1 1 0 000 1.84L5.25 8.051a.999.999 0 01.356-.257l4-1.714a1 1 0 11.788 1.838l-2.727 1.17 1.94.831a1 1 0 00.787 0l7-3a1 1 0 000-1.838l-7-3zM3.31 9.397L5 10.12v4.102a8.969 8.969 0 00-1.05-.174 1 1 0 01-.89-.89 11.115 11.115 0 01.25-3.762zM9.3 16.573A9.026 9.026 0 007 14.935v-3.957l1.818.78a3 3 0 002.364 0l5.508-2.361a11.026 11.026 0 01.25 3.762 1 1 0 01-.89.89 8.968 8.968 0 00-5.35 2.524 1 1 0 01-1.4 0zM6 18a1 1 0 001-1v-2.065a8.935 8.935 0 00-2-.712V17a1 1 0 001 1z" />
@@ -130,7 +130,7 @@ const CourseEnrollmentAlert = () => {
 
             <form onSubmit={handleSubmit} className="space-y-5" method="POST" accept-charset="UTF-8" id="form">
               <div>
-                <label htmlFor="courseCode" className="block text-sm font-medium text-gray-700">
+                <label htmlFor="courseCode" className="block text-sm font-medium text-white">
                   Course Code
                 </label>
                 <div className="mt-1 relative rounded-md shadow-sm">
@@ -149,8 +149,8 @@ const CourseEnrollmentAlert = () => {
                     className={`pl-10 block w-full pr-3 py-3 border ${
                       touched.courseCode && !validateCourseCode(courseCode)
                         ? "border-red-300 text-red-900 placeholder-red-300 focus:ring-red-500 focus:border-red-500"
-                        : "border-gray-300 focus:ring-indigo-500 focus:border-indigo-500"
-                    } rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-2 transition duration-150`}
+                        : "border-gray-300 focus:ring-green-500 focus:border-green-500"
+                    } rounded-md shadow-sm bg-white/5 text-white focus:outline-none focus:ring-2 transition duration-150`}
                     required
                   />
                   {touched.courseCode && !validateCourseCode(courseCode) && (
@@ -167,7 +167,7 @@ const CourseEnrollmentAlert = () => {
               </div>
 
               <div>
-                <label htmlFor="slotLetter" className="block text-sm font-medium text-gray-700">
+                <label htmlFor="slotLetter" className="block text-sm font-medium text-white">
                   Slot Letter
                 </label>
                 <div className="mt-1 relative rounded-md shadow-sm">
@@ -180,22 +180,28 @@ const CourseEnrollmentAlert = () => {
                     id="slotLetter"
                     value={slotLetter}
                     onChange={(e) => setSlotLetter(e.target.value)}
-                    className="pl-10 block w-full pr-3 py-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition duration-150"
+                    className="pl-10 block w-full pr-3 py-3 border border-green-300 rounded-md bg-white/5  shadow-sm focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-indigo-500 transition duration-150 text-white "
                   >
                     {Array.from({ length: 26 }, (_, i) => String.fromCharCode(65 + i)).map((letter) => (
-                      <option key={letter} value={letter}>{letter}</option>
+                     <option
+                     key={letter}
+                     value={letter}
+                     style={{ backgroundColor: '#1f2937', color: 'white' }} // Dark background for options
+                   >
+                     {letter}
+                   </option>
                     ))}
                   </select>
                 </div>
               </div>
 
               <div>
-                <label htmlFor="phoneNumber" className="block text-sm font-medium text-gray-700">
+                <label htmlFor="phoneNumber" className="block text-sm font-medium text-white">
                   Phone Number    <a 
     href="https://wa.me/14155238886?text=join%20volume-did" 
     target="_blank" 
     rel="noopener noreferrer" 
-    className="ml-2 text-blue-600 font-semibold hover:underline"
+    className="ml-2 text-green-500 font-semibold hover:underline"
   >
     DM +1 (415) 523-8886 - "volume-did"
   </a>
@@ -220,22 +226,22 @@ const CourseEnrollmentAlert = () => {
                     maxLength={10}
                     className={`pl-10 block w-full pr-3 py-3 border ${
                       touched.phoneNumber && !validatePhoneNumber(phoneNumber)
-                        ? "border-red-300 text-red-900 placeholder-red-300 focus:ring-red-500 focus:border-red-500"
-                        : "border-gray-300 focus:ring-indigo-500 focus:border-indigo-500"
-                    } rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-2 transition duration-150`}
+                        ? "border-red-300 text-red-900 placeholder-red-300 focus:ring-red-500 bg-white/5 focus:border-red-500"
+                        : "border-gray-300 focus:ring-green-500 focus:border-green-500"
+                    } rounded-md bg-white/5 text-white shadow-sm placeholder-gray-400 focus:outline-none focus:ring-2 transition duration-150`}
                     required
                   />
                   
                 </div>
                 
-                <p className="mt-1 text-xs text-gray-500">We'll send SMS notifications to this number. </p>
+                <p className="mt-1 text-xs text-gray-200">We'll send SMS notifications to this number. </p>
               </div>
 
               <div className="pt-2">
                 <button
                   type="submit"
                   disabled={isLoading}
-                  className={`w-full flex justify-center items-center px-4 py-3 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-gradient-to-r from-blue-600 to-indigo-700 hover:from-blue-700 hover:to-indigo-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition duration-150 ${
+                  className={`w-full flex justify-center items-center px-4 py-3 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-[#19b06c] hover:bg-[#0a7247] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition duration-150 ${
                     isLoading ? "opacity-70 cursor-not-allowed" : ""
                   }`}
                 >
@@ -268,7 +274,7 @@ const CourseEnrollmentAlert = () => {
         clipRule="evenodd"
       />
     </svg>
-    <p>
+    <p className="text-white">
       You'll receive an SMS when a course is released.  
       
     </p>
