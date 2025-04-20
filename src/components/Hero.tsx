@@ -59,9 +59,9 @@ const Hero = () => {
                 },
                 {
                   icon: Award,
-                  title: 'Skill Development',
-                  desc: 'Free Certifications',
-                  path: '/skills'
+                  title: 'Course Enrollment Alert System',
+                  desc: 'No more worries in lossing the required course ',
+                  path: '/course'
                 },
                 {
                   icon: Calendar,
