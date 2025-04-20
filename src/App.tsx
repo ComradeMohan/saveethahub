@@ -33,7 +33,7 @@ import ATS from './pages/ATS';
 
 import InternshipPage from './pages/InternshipPage';
 import Portfolio from './pages/Portfolio';
-
+import CourseEnrollmentAlert from './pages/courseenrollmentalert';
 const App: React.FC = () => {
     const [user, setUser] = useState<{ username: string; email?: string } | null>(null);
     const [isMenuOpen, setIsMenuOpen] = useState(false); // ✅ Added state for mobile menu
@@ -91,6 +91,7 @@ const App: React.FC = () => {
                         <Route path='/internship' element={<InternshipPage />} />
                         <Route path="/pdf-viewer" element={<PdfViewer />} />
                         <Route path='/ATS' element={<ATS />}/>
+                        <Route path='/course' element={<CourseEnrollmentAlert />} />
                         <Route path='/portfolios' element={<Portfolio />} />
                         <Route path="/events" element={<EventsPage />} />
                         <Route path="/contact" element={<ContactPage />} />
