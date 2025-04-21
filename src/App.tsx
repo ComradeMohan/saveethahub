@@ -30,9 +30,12 @@ import Community from "./pages/CommunityPage"
 import ChatPage from "./pages/ChatPage";
 import PdfViewer from "./components/PdfViewer";
 import ATS from './pages/ATS';
-
 import InternshipPage from './pages/InternshipPage';
 import Portfolio from './pages/Portfolio';
+
+import LABS from './pages/LabsPage';
+import SubjectPage from './pages/SubjectPage';
+
 import CourseEnrollmentAlert from './pages/courseenrollmentalert';
 const App: React.FC = () => {
     const [user, setUser] = useState<{ username: string; email?: string } | null>(null);
@@ -94,10 +97,15 @@ const App: React.FC = () => {
                         <Route path='/course' element={<CourseEnrollmentAlert />} />
                         <Route path='/portfolios' element={<Portfolio />} />
                         <Route path="/events" element={<EventsPage />} />
+
+                        <Route path='/labspage' element={<LABS />} />
+                        <Route path="/labs/:subject" element={<SubjectPage />} />
+
                         <Route path="/contact" element={<ContactPage />} />
                         <Route path="/community" element={<Community />} />
-                <Route path="/chat/:communityId" element={<ChatPage />} />
+                        <Route path="/chat/:communityId" element={<ChatPage />} />
                         <Route path="/" element={<Navigate to="/home" replace />} />
+                        
                     </Routes>
                 </main>
             </div>
