@@ -6,147 +6,147 @@ export const subjects: Subject[] = [
         name: 'Object Oriented Programming with C++',
         description: 'Advanced C++ and OOP concepts',
         icon: 'Code2',
-        backgroundColor: 'bg-purple-100'
+        backgroundColor: 'bg-white/10'
       },
         {
     id: 'Python.pdf',
     name: 'Python Programming',
     description: 'Python language fundamentals and applications',
     icon: 'Code',
-    backgroundColor: 'bg-cyan-100'
+    backgroundColor: 'bg-white/10'
   },
   {
     id: 'java.pdf',
     name: 'Programming in Java',
     description: 'Java language and object-oriented programming',
     icon: 'Coffee',
-    backgroundColor: 'bg-orange-100'
+    backgroundColor: 'bg-white/10'
   },
   {
     id: 'database-management',
     name: 'Database Management Systems',
     description: 'UPDATING',
     icon: 'Database',
-    backgroundColor: 'bg-blue-100'
+    backgroundColor: 'bg-white/10'
   },
   {
     id: 'software-engineering',
     name: 'Software Engineering',
     description: 'UPDATING',
     icon: 'Code',
-    backgroundColor: 'bg-blue-100'
+    backgroundColor: 'bg-white/10'
   },
   {
     id: 'biology-environmental',
     name: 'Biology and Environmental Science',
     description: 'UPDATING',
     icon: 'Leaf',
-    backgroundColor: 'bg-blue-100'
+    backgroundColor: 'bg-white/10'
   },
   {
     id: 'professional-ethics',
     name: 'Professional Ethics and Legal Practices',
     description: 'UPDATING',
     icon: 'Scale',
-    backgroundColor: 'bg-blue-100'
+    backgroundColor: 'bg-white/10'
   },
   {
     id: 'engineering-physics',
     name: 'Engineering Physics',
     description: 'UPDATING',
     icon: 'Atom',
-    backgroundColor: 'bg-yellow-100'
+    backgroundColor: 'bg-white/10'
   },
   {
     id: 'engineering-chemistry',
     name: 'Engineering Chemistry',
     description: 'UPDATING',
     icon: 'Flask',
-    backgroundColor: 'bg-yellow-100'
+    backgroundColor: 'bg-white/10'
   },
   {
     id: 'cpp.pdf',
     name: 'C Programming',
     description: 'Fundamentals of C programming language',
     icon: 'Code2',
-    backgroundColor: 'bg-orange-100'
+    backgroundColor: 'bg-white/10'
   },
   {
     id: 'engineering-mathematics',
     name: 'Engineering Mathematics - I',
     description: 'UPDATING',
     icon: 'PlusSquare',
-    backgroundColor: 'bg-orange-100'
+    backgroundColor: 'bg-white/10'
   },
   {
     id: 'digital-system-design',
     name: 'Principles of Digital System Design',
     description: 'UPDATING',
     icon: 'Cpu',
-    backgroundColor: 'bg-orange-100'
+    backgroundColor: 'bg-white/10'
   },
   {
     id: 'data-structures',
     name: 'Data Structures',
     description: 'UPDATING',
     icon: 'Network',
-    backgroundColor: 'bg-red-100'
+    backgroundColor: 'bg-white/10'
   },
   {
     id: 'microprocessor',
     name: 'Microprocessor and Microcontroller',
     description: 'UPDATING',
     icon: 'Chip',
-    backgroundColor: 'bg-red-100'
+    backgroundColor: 'bg-white/10'
   },
   {
     id: 'computing-fundamentals',
     name: 'Fundamentals of Computing',
     description: 'UPDATING',
     icon: 'Monitor',
-    backgroundColor: 'bg-red-100'
+    backgroundColor: 'bg-white/10'
   },
   {
     id: 'object-oriented-analysis',
     name: 'Object Oriented Analysis and Design',
     description: 'UPDATING',
     icon: 'Box',
-    backgroundColor: 'bg-pink-100'
+    backgroundColor: 'bg-white/10'
   },
   {
     id: 'computer-networks',
     name: 'Computer Networks',
     description: 'UPDATING',
     icon: 'Globe',
-    backgroundColor: 'bg-cyan-100'
+    backgroundColor: 'bg-white/10'
   },
   {
     id: 'data-warehousing',
     name: 'Data Warehousing and Data Mining',
     description: 'UPDATING',
     icon: 'Database',
-    backgroundColor: 'bg-cyan-100'
+    backgroundColor: 'bg-white/10'
   },
   {
     id: 'Python.pdf',
     name: 'Python Programming',
     description: 'Python language fundamentals and applications',
     icon: 'Code',
-    backgroundColor: 'bg-cyan-100'
+    backgroundColor: 'bg-white/10'
   },
   {
     id: 'discrete-mathematics',
     name: 'Discrete Mathematics',
     description: 'UPDATING',
     icon: 'Hash',
-    backgroundColor: 'bg-cyan-100'
+    backgroundColor: 'bg-white/10'
   },
   {
     id: 'algorithms',
     name: 'Design and Analysis of Algorithms',
     description: 'UPDATING',
     icon: 'GitBranch',
-    backgroundColor: 'bg-orange-100'
+    backgroundColor: 'bg-white/10'
   },
 
   {
@@ -154,28 +154,28 @@ export const subjects: Subject[] = [
     name: 'Operating Systems',
     description: 'UPDATING',
     icon: 'Server',
-    backgroundColor: 'bg-orange-100'
+    backgroundColor: 'bg-white/10'
   },
   {
     id: 'compiler-design',
     name: 'Compiler Design',
     description: 'UPDATING',
     icon: 'FileCode',
-    backgroundColor: 'bg-orange-100'
+    backgroundColor: 'bg-white/10'
   },
   {
     id: 'internet-programming',
     name: 'Internet Programming for Packets Delivery',
     description: 'UPDATING',
     icon: 'Globe2',
-    backgroundColor: 'bg-purple-100'
+    backgroundColor: 'bg-white/10'
   },
   {
     id: 'cryptography',
     name: 'Cryptography and Network Security',
     description: 'UPDATING',
     icon: 'Shield',
-    backgroundColor: 'bg-purple-100'
+    backgroundColor: 'bg-white/10'
   },
   
   {
@@ -183,35 +183,35 @@ export const subjects: Subject[] = [
     name: 'Probability and Statistics',
     description: 'UPDATING',
     icon: 'BarChart',
-    backgroundColor: 'bg-purple-100'
+    backgroundColor: 'bg-white/10'
   },
   {
     id: 'computer-architecture',
     name: 'Computer Architecture',
     description: 'UPDATING',
     icon: 'Cpu',
-    backgroundColor: 'bg-indigo-100'
+    backgroundColor: 'bg-white/10'
   },
   {
     id: 'theory-computation',
     name: 'Theory of Computation',
     description: 'UPDATING',
     icon: 'Binary',
-    backgroundColor: 'bg-indigo-100'
+    backgroundColor: 'bg-white/10'
   },
   {
     id: 'artificial-intelligence',
     name: 'Artificial Intelligence',
     description: 'UPDATING',
     icon: 'Brain',
-    backgroundColor: 'bg-indigo-100'
+    backgroundColor: 'bg-white/10'
   },
   {
     id: 'technical-english',
     name: 'Technical English',
     description: 'UPDATING',
     icon: 'FileText',
-    backgroundColor: 'bg-green-100'
+    backgroundColor: 'bg-white/10'
   }
 ];
 
