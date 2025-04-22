@@ -18,10 +18,10 @@ const SubjectCard: React.FC<SubjectCardProps> = ({ subject }) => {
       className={`${subject.backgroundColor} p-6 rounded-lg shadow-md hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1 flex flex-col h-full`}
     >
       <div className="flex items-center mb-4">
-        {Icon && <Icon className="w-10 h-10 text-blue-800 mr-3" />}
-        <h3 className="text-xl font-bold text-blue-900">{subject.name}</h3>
+        {Icon && <Icon className="w-10 h-10 text-teal-400 mr-3" />}
+        <h3 className="text-xl font-bold text-white">{subject.name}</h3>
       </div>
-      <p className="text-gray-700 mb-4 flex-grow">{subject.description}</p>
+      <p className="text-gray-200 mb-4 flex-grow">{subject.description}</p>
       <div className="text-blue-800 font-medium mt-auto">
         {subject.labSets} Lab Sets
       </div>
