@@ -23,7 +23,7 @@ const SubjectCard: React.FC<SubjectCardProps> = ({ subject }) => {
       </div>
       <p className="text-gray-200 mb-4 flex-grow">{subject.description}</p>
       <div className="text-blue-800 font-medium mt-auto">
-        {subject.labSets} Lab Sets
+        {subject.labSets} 
       </div>
     </Link>
   );
