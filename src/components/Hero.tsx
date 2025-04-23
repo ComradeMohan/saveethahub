@@ -23,45 +23,60 @@ const GetStartedButton = () => {
 function generateAlternatingEvents(startDate: Date, endDate: Date): CalendarEvent[] {
   const events: CalendarEvent[] = [];
   let current = new Date(startDate);
-  let useAB = true; // toggle between A/B and C/D
+  let useAB = true;
 
   while (current <= endDate) {
-    const day = current.getDay(); // Sunday = 0, Saturday = 6
-
+    const day = current.getDay();
     const isSunday = day === 0;
-    const isThirdSaturday =
-      day === 6 && Math.ceil(current.getDate() / 7) === 3;
+    const isThirdSaturday = day === 6 && Math.ceil(current.getDate() / 7) === 3;
 
-    if (!isSunday && !(day === 6 && isThirdSaturday)) {
-      const slots = useAB ? ['A', 'B'] : ['C', 'D'];
+    if (!isSunday && !isThirdSaturday) {
+      const combinedSlot = useAB ? 'A B' : 'C D';
+      const title = useAB ? ' A B' : ' C D';
 
-      slots.forEach((slot, i) => {
-        events.push({
-          id: `${current.toDateString()}-${slot}`,
-          title: ` ${slot}`,
-          start: new Date(current.getFullYear(), current.getMonth(), current.getDate(), 9 + i * 2), // 9AM, 11AM
-          end: new Date(current.getFullYear(), current.getMonth(), current.getDate(), 11 + i * 2), // 11AM, 1PM
-          type: 'class',
-          slot: slot as 'A' | 'B' | 'C' | 'D',
-          subject: `Subject ${slot}`,
-        });
+      events.push({
+        id: `${current.toDateString()}-${combinedSlot}`,
+        title,
+        start: new Date(current.getFullYear(), current.getMonth(), current.getDate(), 9),
+        end: new Date(current.getFullYear(), current.getMonth(), current.getDate(), 13), // 9AM to 1PM
+        type: 'class',
+        slot: combinedSlot as 'AB' | 'CD',
+        subject: `Subjects ${combinedSlot}`,
       });
 
       useAB = !useAB;
     }
 
-    // Move to next day
     current.setDate(current.getDate() + 1);
   }
 
   return events;
 }
+
 // Hero component using the GetStartedButton
 const Hero = () => {
   const [currentDate, setCurrentDate] = useState(new Date());
 
   const dummyEvents = generateAlternatingEvents(new Date(), new Date(new Date().setDate(new Date().getDate() + 30)));
 
+
+  dummyEvents.push({
+    id: 'hostel-reporting',
+    title: 'Hostel Return',
+    start: new Date(new Date().getFullYear(), new Date().getMonth(), 27, 10, 0), // 27th of current month, 10 AM
+    end: new Date(new Date().getFullYear(), new Date().getMonth(), 27, 11, 0),
+    type: 'event',
+    details: 'Hostel Return',
+  });
+
+  dummyEvents.push({
+    id: 'hostel-reporting',
+    title: 'NPTEL',
+    start: new Date(new Date().getFullYear(), new Date().getMonth(), 25, 10, 0), // 27th of current month, 10 AM
+    end: new Date(new Date().getFullYear(), new Date().getMonth(), 27, 11, 0),
+    type: 'event',
+    details: 'Hostel Return',
+  });
 
   const dummyFilters: FilterOptions = {
     classes: true,
