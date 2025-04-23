@@ -1,12 +1,14 @@
-import {  BookOpen, Award, Calendar,Group } from 'lucide-react';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+import CalendarGrid from '../components/Calendar/CalendarGrid';
+import { useState } from 'react';
+import type { CalendarEvent, FilterOptions } from '../types/calender';
 
 // Separate GetStartedButton component
 const GetStartedButton = () => {
   const navigate = useNavigate();
 
   const handleClick = () => {
-    navigate('/login'); // Ensure this route is correct (e.g. '/login' if needed)
+    navigate('/login');
   };
 
   return (
@@ -18,9 +20,62 @@ const GetStartedButton = () => {
     </button>
   );
 };
+function generateAlternatingEvents(startDate: Date, endDate: Date): CalendarEvent[] {
+  const events: CalendarEvent[] = [];
+  let current = new Date(startDate);
+  let useAB = true; // toggle between A/B and C/D
 
+  while (current <= endDate) {
+    const day = current.getDay(); // Sunday = 0, Saturday = 6
+
+    const isSunday = day === 0;
+    const isThirdSaturday =
+      day === 6 && Math.ceil(current.getDate() / 7) === 3;
+
+    if (!isSunday && !(day === 6 && isThirdSaturday)) {
+      const slots = useAB ? ['A', 'B'] : ['C', 'D'];
+
+      slots.forEach((slot, i) => {
+        events.push({
+          id: `${current.toDateString()}-${slot}`,
+          title: ` ${slot}`,
+          start: new Date(current.getFullYear(), current.getMonth(), current.getDate(), 9 + i * 2), // 9AM, 11AM
+          end: new Date(current.getFullYear(), current.getMonth(), current.getDate(), 11 + i * 2), // 11AM, 1PM
+          type: 'class',
+          slot: slot as 'A' | 'B' | 'C' | 'D',
+          subject: `Subject ${slot}`,
+        });
+      });
+
+      useAB = !useAB;
+    }
+
+    // Move to next day
+    current.setDate(current.getDate() + 1);
+  }
+
+  return events;
+}
 // Hero component using the GetStartedButton
 const Hero = () => {
+  const [currentDate, setCurrentDate] = useState(new Date());
+
+  const dummyEvents = generateAlternatingEvents(new Date(), new Date(new Date().setDate(new Date().getDate() + 30)));
+
+
+  const dummyFilters: FilterOptions = {
+    classes: true,
+    exams: {
+      laboratory: true,
+      model: true,
+      semester: true,
+      practical: true,
+      preLab: true,
+    },
+    holidays: true,
+    events: true,
+  };
+
   return (
     <div className="relative min-h-[calc(100vh-5rem)] pt-10 flex items-center">
       {/* Background Elements */}
@@ -48,54 +103,15 @@ const Hero = () => {
             </div>
           </div>
 
-          <div className="relative">
-            <div className="grid grid-cols-2 gap-4">
-              {[
-                {
-                  icon: BookOpen,
-                  title: 'Community',
-                  desc: 'Interactive Groups',
-                  path: '/community'
-                },
-                {
-                  icon: Award,
-                  title: 'Course Enrollment Alert System',
-                  desc: 'No more worries in lossing the required course ',
-                  path: '/course'
-                },
-                {
-                  icon: Calendar,
-                  title: 'Internships',
-                  desc: 'Find your next job',
-                  path: '/internship'
-                },
-                
-                {
-                  icon: Group,
-                  title: 'Portfolios',
-                  desc: 'Get inspirations from developers',
-                  path: '/portfolios'
-                }
-              ].map((item, index) => (
-                <Link
-                  key={index}
-                  to={item.path}
-                  className="p-6 bg-white/10 backdrop-blur-lg rounded-xl hover:transform hover:-translate-y-1 transition-all duration-300"
-                >
-                  <item.icon className="h-8 w-8 text-teal-400 mb-4" />
-                  <h3 className="text-lg font-semibold text-white mb-2 flex items-center gap-2">
-  {item.title}
-  {item.title === 'Course Enrollment Alert System' && (
-    <span className="px-2 py-0.5 text-xs font-bold text-red-600 bg-white/90 rounded animate-pulse">
-      NEW
-    </span>
-  )}
-</h3>
-
-                  <p className="text-white/70 text-sm">{item.desc}</p>
-                </Link>
-              ))}
-            </div>
+          {/* Right Side: CalendarGrid */}
+          <div className="relative h-[28rem] w-full rounded-xl overflow-hidden shadow-xl hover:shadow-2xl transition-shadow duration-300 transform hover:scale-105">
+            <CalendarGrid
+              currentDate={currentDate}
+              events={dummyEvents}
+              viewType="month"
+              filters={dummyFilters}
+              onDayClick={(date) => setCurrentDate(date)}
+            />
           </div>
         </div>
       </div>

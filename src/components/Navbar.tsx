@@ -1,5 +1,5 @@
 import React from 'react';
-import { Menu, X} from 'lucide-react';
+import { Menu, X, GraduationCap } from 'lucide-react';
 import { Link, useLocation } from 'react-router-dom';
 
 interface NavbarProps {
@@ -20,7 +20,7 @@ const Navbar: React.FC<NavbarProps> = ({ items, isMenuOpen, setIsMenuOpen }) => 
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-16">
           <Link to="/" className="flex items-center space-x-2">
-                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 55 35" width="45" height="35">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 55 35" width="45" height="35">
   <defs>
     <linearGradient id="textGradient" x1="0" y1="0" x2="0" y2="1">
       <stop offset="0%" stop-color="#2af598" />
@@ -29,7 +29,9 @@ const Navbar: React.FC<NavbarProps> = ({ items, isMenuOpen, setIsMenuOpen }) => 
   </defs>
   <text x="0" y="35" font-size="40" font-family="Arial, sans-serif" font-weight="bold" fill="url(#textGradient)">SH</text>
 </svg>
-{/*             <GraduationCap className="h-8 w-8 text-white" /> */}
+
+
+            {/* <GraduationCap className="h-8 w-8 text-white" /> */}
             <span className="text-xl font-bold text-white">Saveetha Hub</span>
           </Link>
 
