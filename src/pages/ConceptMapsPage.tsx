@@ -94,7 +94,7 @@ const ConceptMapsPage = () => {
     Kindly Upload Missing Concept Maps (Max: 20MB)
   </h6>
   <p className="mb-4 text-sm">
-    Please upload your files (PDF, JPG, PNG, DOCX) to our Google Drive folder.
+    Please upload your files (PDF, JPG, PNG, DOCX) college mail only.
   </p>
   <a
     href="https://drive.google.com/drive/folders/1HdQHDegzQcfzYel12O2HpawHo0Qe_8GE?usp=sharing"
