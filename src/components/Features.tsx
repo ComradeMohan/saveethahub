@@ -6,31 +6,31 @@ const Features = () => {
   const features = [
     {
       icon: Calculator,
-      title: 'CGPA Calculator',
-      description: 'Calculate your CGPA easily with our intuitive calculator. Track your academic progress and set goals.',
+      title: 'Community',
+      description: 'Interactive Groups',
       color: 'from-blue-500 to-blue-600',
-      path: '/cgpa-calculator' // Path for CGPA Calculator
+      path: '/community' // Path for CGPA Calculator
     },
     {
       icon: Clock,
-      title: 'Attendance Tracker',
-      description: 'Monitor your attendance across subjects. Stay informed about your attendance percentage.',
+      title: 'Course Enrollment Alert',
+      description: 'No more worries in lossing the required course',
       color: 'from-teal-500 to-teal-600',
-      path: '/attendance' // Path for Attendance Tracker
+      path: '/course' // Path for Attendance Tracker
     },
     {
       icon: Compass,
-      title: 'Concept Maps',
-      description: 'Visual learning aids to understand complex topics. Interactive and comprehensive study materials.',
+      title: 'Internships',
+      description: 'Find your next job',
       color: 'from-purple-500 to-purple-600',
-      path: '/concept-maps' // Path for Concept Maps
+      path: '/internship' // Path for Concept Maps
     },
     {
       icon: Award,
-      title: 'Free Certifications',
-      description: 'Enhance your skills with free certification courses. Learn from industry experts.',
+      title: 'Portfolios',
+      description: 'Get inspirations from developers',
       color: 'from-pink-500 to-pink-600',
-      path: '/certifications' // Path for Free Certifications
+      path: '/portfolios' // Path for Free Certifications
     }
   ];
 
