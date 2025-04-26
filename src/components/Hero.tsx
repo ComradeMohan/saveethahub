@@ -31,8 +31,8 @@ function generateAlternatingEvents(startDate: Date, endDate: Date): CalendarEven
     const isThirdSaturday = day === 6 && Math.ceil(current.getDate() / 7) === 3;
 
     if (!isSunday && !isThirdSaturday) {
-      const combinedSlot = useAB ? 'A B' : 'C D';
-      const title = useAB ? ' A B' : ' C D';
+      const combinedSlot = useAB ? 'A B' : 'B A';
+      const title = useAB ? ' A B' : ' B A';
 
       events.push({
         id: `${current.toDateString()}-${combinedSlot}`,
