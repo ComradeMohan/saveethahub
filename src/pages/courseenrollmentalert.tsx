@@ -92,7 +92,7 @@ const CourseEnrollmentAlert = () => {
             <p className="mt-1 text-blue-100">
   Get notified when course slots open up{" "}
   <span className="backdrop-blur-md bg-white/10 border-white/20 text-green-300 px-2 py-0.5 rounded-md text-sm font-semibold">
-    TESTING MODE
+    Sorry server busy
   </span>
 </p>
 
