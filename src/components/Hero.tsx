@@ -41,13 +41,13 @@ function generateAlternatingEvents(startDate: Date, endDate: Date): CalendarEven
       const title = useAB ? ' A B' : ' B A';
 
       events.push({
-        id: ${current.toDateString()}-${combinedSlot},
+        id: `${current.toDateString()}-${combinedSlot}`,
         title,
         start: new Date(current.getFullYear(), current.getMonth(), current.getDate(), 9),
         end: new Date(current.getFullYear(), current.getMonth(), current.getDate(), 13),
         type: 'class',
         slot: combinedSlot as 'AB' | 'CD',
-        subject: Subjects ${combinedSlot},
+        subject: `Subjects ${combinedSlot}`,
       });
 
       useAB = !useAB;
@@ -82,7 +82,7 @@ const Hero = () => {
   const simmamDays = [8, 9, 10];
   simmamDays.forEach((day) => {
     dummyEvents.push({
-      id: simmam-${day},
+      id: `simmam-${day}`,
       title: 'Fest',
       start: new Date(new Date().getFullYear(), 4, day, 10, 0),
       end: new Date(new Date().getFullYear(), 4, day, 12, 0),
@@ -94,7 +94,7 @@ const Hero = () => {
   // Add Holidays from May 17 to 25
   for (let day = 17; day <= 25; day++) {
     dummyEvents.push({
-      id: holiday-${day},
+      id: `holiday-${day}`,
       title: 'Holiday',
       start: new Date(new Date().getFullYear(), 4, day, 0, 0),
       end: new Date(new Date().getFullYear(), 4, day, 23, 59),
@@ -160,4 +160,4 @@ const Hero = () => {
   );
 };
 
-export default Hero; 
+export default Hero;
