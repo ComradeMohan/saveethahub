@@ -73,8 +73,8 @@ const Hero = () => {
   dummyEvents.push({
     id: 'hostel-returning',
     title: 'Hostel Return',
-    start: new Date(new Date().getFullYear(), 4, 27, 10, 0),
-    end: new Date(new Date().getFullYear(), 4, 27, 11, 0),
+    start: new Date(new Date().getFullYear(), 4, 25, 10, 0),
+    end: new Date(new Date().getFullYear(), 4, 25, 11, 0),
     type: 'event',
     details: 'Hostel Return',
   });
