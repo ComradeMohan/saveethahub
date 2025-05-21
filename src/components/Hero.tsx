@@ -26,7 +26,7 @@ const Hero = () => {
 
     const handleDownload = () => {
     // Example: Redirect to APK url or trigger download
-    window.location.href = '/path-to-your-app.apk'; // Change this to your APK file path
+    window.location.href = 'https://github.com/ComradeMohan/UniValut/releases/download/v1.0/UniVault.apk'; // Change this to your APK file path
   }; 
 
   return (
