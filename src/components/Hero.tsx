@@ -139,7 +139,7 @@ const Hero = () => {
                 onClick={() => setShowTerms(true)}
                 className="px-8 py-3 bg-white/10 hover:bg-white/20 text-white rounded-lg font-medium transition-colors backdrop-blur-sm"
               >
-                Download APK
+                Download APP 1.0
               </button>
             </div>
           </div>
