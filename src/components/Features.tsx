@@ -6,24 +6,24 @@ const Features = () => {
   const features = [
     {
       icon: Calculator,
-      title: 'CGPA Calculator',
-      description: 'Calculate your CGPA easily with our intuitive calculator. Track your academic progress and set goals.',
+      title: 'Internship',
+      description: 'Find your next internship',
       color: 'from-blue-500 to-blue-600',
-      path: '/cgpa-calculator' // Path for CGPA Calculator
+      path: '/internship' // Path for CGPA Calculator
     },
     {
       icon: Clock,
-      title: 'Attendance Tracker',
-      description: 'Monitor your attendance across subjects. Stay informed about your attendance percentage.',
+      title: 'Course Enrollment Alert',
+      description: 'Never miss your require course, get notified when course released',
       color: 'from-teal-500 to-teal-600',
-      path: '/attendance' // Path for Attendance Tracker
+      path: '/course' // Path for Attendance Tracker
     },
     {
       icon: Compass,
-      title: 'Concept Maps',
-      description: 'Visual learning aids to understand complex topics. Interactive and comprehensive study materials.',
+      title: 'Portfolios',
+      description: 'Get Insprired by top developers to build portfolio ',
       color: 'from-purple-500 to-purple-600',
-      path: '/concept-maps' // Path for Concept Maps
+      path: '/portfolios' // Path for Concept Maps
     },
     {
       icon: Award,
