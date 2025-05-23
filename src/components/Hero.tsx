@@ -61,7 +61,7 @@ const Hero = () => {
   const [showTerms, setShowTerms] = useState(false);
 
   const handleDownload = () => {
-    window.location.href = 'https://github.com/ComradeMohan/UniValut/releases/download/v1.0/UniVault.apk';
+    window.location.href = 'https://github.com/ComradeMohan/saveethahub/releases/download/V3.0/UniVault_V3.0.apk';
   };
 
   // Dummy Events
