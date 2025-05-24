@@ -61,7 +61,7 @@ const Hero = () => {
   const [showTerms, setShowTerms] = useState(false);
 
   const handleDownload = () => {
-    window.location.href = 'https://github.com/ComradeMohan/saveethahub/releases/download/V3.0/UniVault_V3.0.apk';
+    window.location.href = 'https://github.com/ComradeMohan/UniValut/releases/download/v3.0/Univault_auto_update.apk';
   };
 
   // Dummy Events
@@ -204,21 +204,23 @@ const Hero = () => {
             <h2 className="text-2xl font-bold mb-4">Terms and Conditions</h2>
             <div className="max-h-60 overflow-y-auto mb-6 text-gray-700">
               <ul className="list-disc ml-5 space-y-2">
-                <li>You must be at least 18 years old to download.</li>
-                <li>College students must use a valid college email.</li>
+                <li>Only college students with a valid college email address may register and use this app.</li>
                 <li>
-                  The app is currently in <span className="bg-green-100 text-green-700 px-1 rounded">testing</span>{' '}
-                  and is provided "as is".
+                 This app is currently in a <span className="bg-green-100 text-green-700 px-1 rounded">testing</span> phase and is provided “as is.” Features and functionality may change or be updated at any time.
                 </li>
-                <li>Updates must be downloaded from the official website.</li>
-                <li>We are not liable for data loss or damage.</li>
+                <li>Please download updates and new versions only from the official website to ensure you have the latest and most secure version.
+
+</li>
+                <li>The developer is not responsible for any issues, losses, or damages that may arise from using this app. Use at your own discretion.</li>
+                <li>While reasonable efforts are made to protect your data, no app can be guaranteed 100% secure. Users are responsible for safeguarding their own credentials.</li>
                 <li>Use must comply with laws and rules.</li>
                 <li>
-                  Your <span className="bg-green-100 text-green-700 px-1 rounded">privacy</span> is respected.
+                  Your <span className="bg-green-100 text-green-700 px-1 rounded">privacy</span> is respected. Personal information will not be shared without your consent, except as required by law.
                 </li>
                 <li>Do not share your credentials.</li>
                 <li>Accounts violating terms may be suspended.</li>
                 <li>You agree to receive academic notifications.</li>
+                <li>The app does not contain intentional security threats or malicious code. However, users are encouraged to practice safe usage and report any concerns..</li>
               </ul>
             </div>
             <div className="flex justify-end gap-4">
