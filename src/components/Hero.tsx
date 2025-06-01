@@ -160,10 +160,11 @@ const Hero = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           {[
             {
-              icon: BookOpen,
-              title: 'Learning Resources',
-              desc: 'Interactive Concept Maps',
-              path: '/concept-maps',
+                icon: BookOpen,
+                title: 'Learn Coding',
+                desc: 'Saveetha Code Editor',
+                path: 'https://campus-codex.netlify.app/',
+                external: true,
             },
             {
               icon: Award,
