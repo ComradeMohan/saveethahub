@@ -75,10 +75,10 @@ const Hero = () => {
   dummyEvents.push({
     id: 'hostel-returning',
     title: 'Hostel Return',
-    start: new Date(new Date().getFullYear(), 4, 25, 10, 0),
-    end: new Date(new Date().getFullYear(), 4, 25, 11, 0),
+    start: new Date(new Date().getFullYear(), 5, 25, 9, 0),
+    end: new Date(new Date().getFullYear(), 5, 25, 12, 0),
     type: 'event',
-    details: 'Hostel Return',
+    details: 'Theroy Exam',
   });
 
   // Add Theory Exams from June 9 to June 12
