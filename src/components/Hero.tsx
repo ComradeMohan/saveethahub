@@ -83,8 +83,8 @@ const Hero = () => {
     dummyEvents.push({
       id: `simmam-${day}`,
       title: 'Fest',
-      start: new Date(new Date().getFullYear(), 4, day, 10, 0),
-      end: new Date(new Date().getFullYear(), 4, day, 12, 0),
+      start: new Date(new Date().getFullYear(), 5, day, 10, 0),
+      end: new Date(new Date().getFullYear(), 5, day, 12, 0),
       type: 'event',
       details: 'Simmam Fest',
     })
