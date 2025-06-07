@@ -17,16 +17,6 @@ const GetStartedButton = () => {
     </button>
   );
 };
-for (let day = 9; day <= 12; day++) {
-  dummyEvents.push({
-    id: `theory-exam-${day}`,
-    title: 'Theory Exam',
-    start: new Date(new Date().getFullYear(), 5, day, 9, 0),
-    end: new Date(new Date().getFullYear(), 5, day, 12, 0),
-    type: 'event',
-    details: 'Theory Exam',
-  });
-}
 
 // Event Generator
 function generateAlternatingEvents(startDate: Date, endDate: Date): CalendarEvent[] {
@@ -90,7 +80,28 @@ const Hero = () => {
     type: 'event',
     details: 'Theroy Exam',
   });
-
+  dummyEvents.push({
+    id: 'hostel-returning',
+    title: 'Theory Exam',
+    start: new Date(new Date().getFullYear(), 5, 10, 9, 0),
+    end: new Date(new Date().getFullYear(), 5, 12, 12, 0),
+    type: 'event',
+    details: 'Theroy Exam',
+  });  dummyEvents.push({
+    id: 'hostel-returning',
+    title: 'Theory Exam',
+    start: new Date(new Date().getFullYear(), 5, 11, 9, 0),
+    end: new Date(new Date().getFullYear(), 5, 12, 12, 0),
+    type: 'event',
+    details: 'Theroy Exam',
+  });  dummyEvents.push({
+    id: 'hostel-returning',
+    title: 'Theory Exam',
+    start: new Date(new Date().getFullYear(), 5, 12, 9, 0),
+    end: new Date(new Date().getFullYear(), 5, 12, 12, 0),
+    type: 'event',
+    details: 'Theroy Exam',
+  });
   // Add Theory Exams from June 9 to June 12
   for (let day = 9; day <= 12; day++) {
     dummyEvents.push({
