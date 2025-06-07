@@ -102,6 +102,38 @@ const Hero = () => {
     type: 'event',
     details: 'Theroy Exam',
   });
+  dummyEvents.push({
+    id: 'hostel-returning',
+    title: 'Start Summit',
+    start: new Date(new Date().getFullYear(), 5, 17, 9, 0),
+    end: new Date(new Date().getFullYear(), 5, 12, 12, 0),
+    type: 'event',
+    details: 'Theroy Exam',
+  });
+  dummyEvents.push({
+    id: 'hostel-returning',
+    title: 'Star Summit',
+    start: new Date(new Date().getFullYear(), 5, 16, 9, 0),
+    end: new Date(new Date().getFullYear(), 5, 12, 12, 0),
+    type: 'event',
+    details: 'Theroy Exam',
+  });
+  dummyEvents.push({
+    id: 'hostel-returning',
+    title: 'Star Summit',
+    start: new Date(new Date().getFullYear(), 5, 18, 9, 0),
+    end: new Date(new Date().getFullYear(), 5, 12, 12, 0),
+    type: 'event',
+    details: 'Theroy Exam',
+  });
+  dummyEvents.push({
+    id: 'hostel-returning',
+    title: 'Star Summit',
+    start: new Date(new Date().getFullYear(), 5, 19, 9, 0),
+    end: new Date(new Date().getFullYear(), 5, 12, 12, 0),
+    type: 'event',
+    details: 'Theroy Exam',
+  });
   // Add Theory Exams from June 9 to June 12
   for (let day = 9; day <= 12; day++) {
     dummyEvents.push({
