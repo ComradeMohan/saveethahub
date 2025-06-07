@@ -79,16 +79,17 @@ const Hero = () => {
     details: 'Hostel Return',
   });
 
-  [8, 9, 10].forEach((day) =>
-    dummyEvents.push({
-      id: `simmam-${day}`,
-      title: 'Fest',
-      start: new Date(new Date().getFullYear(), 5, day, 10, 0),
-      end: new Date(new Date().getFullYear(), 5, day, 12, 0),
-      type: 'event',
-      details: 'Simmam Fest',
-    })
-  );
+ [9, 10, 11, 12].forEach((day) =>
+  dummyEvents.push({
+    id: `theory-exam-${day}`,
+    title: 'Theory Exam',
+    start: new Date(new Date().getFullYear(), 5, day, 9, 0), // June = 5
+    end: new Date(new Date().getFullYear(), 5, day, 12, 0),
+    type: 'exam',
+    details: 'Theory Exam',
+  })
+);
+
 
   // Add Theory Exams from June 9 to June 12
 for (let day = 9; day <= 12; day++) {
