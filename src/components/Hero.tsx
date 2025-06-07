@@ -24,8 +24,8 @@ function generateAlternatingEvents(startDate: Date, endDate: Date): CalendarEven
   let current = new Date(startDate);
   let useAB = true;
 
-  const holidayStart = new Date(current.getFullYear(), 4, 17);
-  const holidayEnd = new Date(current.getFullYear(), 4, 25);
+  const holidayStart = new Date(current.getFullYear(), 4, 17); // May 17
+  const holidayEnd = new Date(current.getFullYear(), 4, 25);   // May 25
 
   while (current <= endDate) {
     const day = current.getDay();
@@ -33,6 +33,7 @@ function generateAlternatingEvents(startDate: Date, endDate: Date): CalendarEven
     const isThirdSaturday = day === 6 && Math.ceil(current.getDate() / 7) === 3;
     const inHolidayRange = current >= holidayStart && current <= holidayEnd;
 
+    // Only include days in May (month=4) excluding Sundays, 3rd Saturdays and holidays
     if (!isSunday && !isThirdSaturday && !inHolidayRange && current.getMonth() === 4) {
       const combinedSlot = useAB ? 'A B' : 'B A';
 
@@ -64,12 +65,13 @@ const Hero = () => {
     window.location.href = 'https://github.com/ComradeMohan/UniValut/releases/download/v3.0/Univault_auto_update.apk';
   };
 
-  // Dummy Events
+  // Generate May Events
   const dummyEvents = generateAlternatingEvents(
     new Date(new Date().getFullYear(), 4, 1),
     new Date(new Date().getFullYear(), 4, 31)
   );
 
+  // Add Hostel Returning event on May 25
   dummyEvents.push({
     id: 'hostel-returning',
     title: 'Hostel Return',
@@ -79,31 +81,19 @@ const Hero = () => {
     details: 'Hostel Return',
   });
 
- [9, 10, 11, 12].forEach((day) =>
-  dummyEvents.push({
-    id: `theory-exam-${day}`,
-    title: 'Theory Exam',
-    start: new Date(new Date().getFullYear(), 5, day, 9, 0), // June = 5
-    end: new Date(new Date().getFullYear(), 5, day, 12, 0),
-    type: 'exam',
-    details: 'Theory Exam',
-  })
-);
-
-
   // Add Theory Exams from June 9 to June 12
-for (let day = 9; day <= 12; day++) {
-  dummyEvents.push({
-    id: `theory-exam-${day}`,
-    title: 'Theory Exam',
-    start: new Date(new Date().getFullYear(), 5, day, 9, 0), // June is month index 5
-    end: new Date(new Date().getFullYear(), 5, day, 12, 0),
-    type: 'exam',
-    details: 'University Theory Exam',
-  });
-}
+  for (let day = 9; day <= 12; day++) {
+    dummyEvents.push({
+      id: `theory-exam-${day}`,
+      title: 'Theory Exam',
+      start: new Date(new Date().getFullYear(), 5, day, 9, 0), // June = month index 5
+      end: new Date(new Date().getFullYear(), 5, day, 12, 0),
+      type: 'exam',
+      details: 'University Theory Exam',
+    });
+  }
 
-
+  // Filters for events display
   const dummyFilters: FilterOptions = {
     classes: true,
     exams: {
@@ -163,11 +153,11 @@ for (let day = 9; day <= 12; day++) {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           {[
             {
-                icon: BookOpen,
-                title: 'Learn Coding',
-                desc: 'Saveetha Code Editor',
-                path: 'https://campus-codex.netlify.app/',
-                external: true,
+              icon: BookOpen,
+              title: 'Learn Coding',
+              desc: 'Saveetha Code Editor',
+              path: 'https://campus-codex.netlify.app/',
+              external: true,
             },
             {
               icon: Award,
@@ -191,6 +181,8 @@ for (let day = 9; day <= 12; day++) {
             <Link
               key={idx}
               to={item.path}
+              target={item.external ? '_blank' : undefined}
+              rel={item.external ? 'noopener noreferrer' : undefined}
               className="p-6 bg-white/10 backdrop-blur-lg rounded-xl hover:transform hover:-translate-y-1 transition-all duration-300"
             >
               <item.icon className="h-8 w-8 text-teal-400 mb-4" />
@@ -210,21 +202,17 @@ for (let day = 9; day <= 12; day++) {
               <ul className="list-disc ml-5 space-y-2">
                 <li>Only college students with a valid college email address may register and use this app.</li>
                 <li>
-                 This app is currently in a <span className="bg-green-100 text-green-700 px-1 rounded">testing</span> phase and is provided “as is.” Features and functionality may change or be updated at any time.
+                  This app is currently in a <span className="bg-green-100 text-green-700 px-1 rounded">testing</span> phase and is provided “as is.” Features and functionality may change or be updated at any time.
                 </li>
-                <li>Please download updates and new versions only from the official website to ensure you have the latest and most secure version.
-
-</li>
+                <li>Please download updates and new versions only from the official website to ensure you have the latest and most secure version.</li>
                 <li>The developer is not responsible for any issues, losses, or damages that may arise from using this app. Use at your own discretion.</li>
                 <li>While reasonable efforts are made to protect your data, no app can be guaranteed 100% secure. Users are responsible for safeguarding their own credentials.</li>
                 <li>Use must comply with laws and rules.</li>
-                <li>
-                  Your <span className="bg-green-100 text-green-700 px-1 rounded">privacy</span> is respected. Personal information will not be shared without your consent, except as required by law.
-                </li>
+                <li>Your <span className="bg-green-100 text-green-700 px-1 rounded">privacy</span> is respected. Personal information will not be shared without your consent, except as required by law.</li>
                 <li>Do not share your credentials.</li>
                 <li>Accounts violating terms may be suspended.</li>
                 <li>You agree to receive academic notifications.</li>
-                <li>The app does not contain intentional security threats or malicious code. However, users are encouraged to practice safe usage and report any concerns..</li>
+                <li>The app does not contain intentional security threats or malicious code. However, users are encouraged to practice safe usage and report any concerns.</li>
               </ul>
             </div>
             <div className="flex justify-end gap-4">
