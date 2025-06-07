@@ -17,6 +17,16 @@ const GetStartedButton = () => {
     </button>
   );
 };
+for (let day = 9; day <= 12; day++) {
+  dummyEvents.push({
+    id: `theory-exam-${day}`,
+    title: 'Theory Exam',
+    start: new Date(new Date().getFullYear(), 5, day, 9, 0),
+    end: new Date(new Date().getFullYear(), 5, day, 12, 0),
+    type: 'event',
+    details: 'Theory Exam',
+  });
+}
 
 // Event Generator
 function generateAlternatingEvents(startDate: Date, endDate: Date): CalendarEvent[] {
