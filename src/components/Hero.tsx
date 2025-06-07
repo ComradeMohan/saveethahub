@@ -90,16 +90,18 @@ const Hero = () => {
     })
   );
 
-  for (let day = 17; day <= 25; day++) {
-    dummyEvents.push({
-      id: `holiday-${day}`,
-      title: 'Holiday',
-      start: new Date(new Date().getFullYear(), 4, day, 0, 0),
-      end: new Date(new Date().getFullYear(), 4, day, 23, 59),
-      type: 'holiday',
-      details: 'Mid-Sem Break',
-    });
-  }
+  // Add Theory Exams from June 9 to June 12
+for (let day = 9; day <= 12; day++) {
+  dummyEvents.push({
+    id: `theory-exam-${day}`,
+    title: 'Theory Exam',
+    start: new Date(new Date().getFullYear(), 5, day, 9, 0), // June is month index 5
+    end: new Date(new Date().getFullYear(), 5, day, 12, 0),
+    type: 'exam',
+    details: 'University Theory Exam',
+  });
+}
+
 
   const dummyFilters: FilterOptions = {
     classes: true,
