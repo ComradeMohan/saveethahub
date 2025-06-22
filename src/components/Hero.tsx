@@ -62,7 +62,7 @@ const Hero = () => {
   const [showTerms, setShowTerms] = useState(false);
 
   const handleDownload = () => {
-    window.location.href = 'https://github.com/ComradeMohan/UniValut/releases/download/v3.0/Univault_auto_update.apk';
+    window.location.href = 'https://github.com/ComradeMohan/saveethahub/releases/download/V5.0/Univault.apk';
   };
 
   // Generate May Events
