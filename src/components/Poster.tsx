@@ -1,9 +1,19 @@
 import React, { useEffect, useState } from 'react';
 
 const Poster: React.FC = () => {
-  const [isClosed, setIsClosed] = useState(false);
+  const [isClosed, setIsClosed] = useState(true); // default hidden
 
   useEffect(() => {
+    // Check if poster was closed within the last 30 minutes
+    const lastClosed = localStorage.getItem('posterClosedAt');
+    const now = new Date().getTime();
+
+    if (!lastClosed || now - parseInt(lastClosed) > 30 * 60 * 1000) {
+      // Show poster if never closed before or it's been more than 30 minutes
+      setIsClosed(false);
+    }
+
+    // Set current date
     const dateElement = document.getElementById('currentDate');
     if (dateElement) {
       dateElement.textContent = new Date().toLocaleDateString();
@@ -21,6 +31,11 @@ const Poster: React.FC = () => {
     }
   }, []);
 
+  const handleClose = () => {
+    setIsClosed(true);
+    localStorage.setItem('posterClosedAt', new Date().getTime().toString());
+  };
+
   if (isClosed) return null;
 
   return (
@@ -30,22 +45,20 @@ const Poster: React.FC = () => {
         className="relative bg-white rounded-3xl p-8 max-w-md w-full z-20 transform transition-all duration-300"
         style={{ boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.25)' }}
       >
-        {/* Close Button */}
         <button
-          onClick={() => setIsClosed(true)}
+          onClick={handleClose}
           className="absolute top-4 right-4 w-10 h-10 bg-red-500 hover:bg-red-600 text-white rounded-full flex items-center justify-center shadow-lg"
         >
           ×
         </button>
 
-        {/* Header */}
+        {/* ...rest of the poster content... */}
         <div className="text-center mb-6">
           <div className="bg-gradient-to-r from-pink-400 to-red-400 text-white px-4 py-2 rounded-full inline-block mb-4">
             🎉 <span className="font-semibold">CONGRATULATIONS!</span>
           </div>
         </div>
 
-        {/* Profile Image */}
         <div className="flex justify-center mb-6">
           <img
             src="/sandeep.jpg"
@@ -54,11 +67,10 @@ const Poster: React.FC = () => {
           />
         </div>
 
-        {/* Info */}
         <div className="text-center space-y-4">
           <div>
             <h2 className="text-2xl font-bold text-gray-800 mb-2">The Sandeep</h2>
-            <p className="text-gray-600 text-sm">Highest Package of the decade icharu</p>
+            <p className="text-gray-600 text-sm">Outstanding Achievement</p>
           </div>
 
           <div className="bg-gradient-to-r from-green-400 to-blue-500 text-white py-4 px-6 rounded-2xl shadow-lg">
@@ -72,7 +84,7 @@ const Poster: React.FC = () => {
               🌟
               <div className="ml-2 text-left">
                 <h3 className="text-lg font-semibold text-gray-800 mb-2">
-                  Congratulations to the MRS Sandeep Kumar!
+                  Congratulations to the Scammer!
                 </h3>
                 <p className="text-gray-700 text-sm leading-relaxed">
                   Your exceptional academic performance and dedication have paid off. This perfect CGPA reflects your hard work and commitment to excellence.
@@ -81,7 +93,6 @@ const Poster: React.FC = () => {
             </div>
           </div>
 
-          {/* Footer */}
           <div className="text-center mt-6 pt-4 border-t border-gray-200 text-xs text-gray-500">
             📅 Achievement Date: <span id="currentDate"></span>
           </div>
