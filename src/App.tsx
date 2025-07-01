@@ -38,6 +38,11 @@ import SubjectPage from "./pages/SubjectPage";
 
 import CourseEnrollmentAlert from "./pages/courseenrollmentalert";
 
+
+import { FileManager } from "./pages/FileManager";
+import ScrollToTop from './components/ScrollToTop';
+
+
 const FULL_TEXT = "Visit Our Campus Codex";
 
 interface User {
@@ -118,6 +123,7 @@ const App: React.FC = () => {
       <div className="min-h-screen bg-gradient-to-br from-[#1a365d] to-[#0d9488]">
         <Navbar items={navItems} isMenuOpen={isMenuOpen} setIsMenuOpen={setIsMenuOpen} />
         <main className="container mx-auto px-4 pt-10">
+        <ScrollToTop />
           <Routes>
             <Route
               path="/login"
@@ -146,6 +152,9 @@ const App: React.FC = () => {
             <Route path="/labs/:subject" element={<SubjectPage />} />
             <Route path="/contact" element={<ContactPage />} />
             <Route path="/community" element={<Community />} />
+            <Route path="/file-manager" element={<FileManager />} />
+           
+
             <Route path="/chat/:communityId" element={<ChatPage />} />
             <Route path="/" element={<Navigate to="/home" replace />} />
           </Routes>

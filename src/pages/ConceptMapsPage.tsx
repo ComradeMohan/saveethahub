@@ -89,25 +89,23 @@ const ConceptMapsPage = () => {
       </div>
 
         <div className="mt-12 flex justify-center">
-        <div className="bg-white/10 p-6 rounded-xl shadow-md max-w-md w-full text-white">
-  <h6 className="text-lg font-semibold mb-4">
-    Kindly Upload Missing Concept Maps (Max: 20MB)
-  </h6>
-  <p className="mb-4 text-sm">
-  Please upload your files <span className="bg-green-200 text-green-800 px-1 rounded">college mail</span> only.
-</p>
+  <div className="bg-white/10 p-6 rounded-xl shadow-md max-w-md w-full text-white text-center">
+    <h6 className="text-lg font-semibold mb-4">
+      Missing Concept Maps? Upload Yours
+    </h6>
+    <p className="mb-4 text-sm">
+      Please use your <span className="bg-green-200 text-green-800 px-1 rounded">college mail</span> to contribute.
+    </p>
 
-  <a
-    href="https://drive.google.com/drive/folders/1HdQHDegzQcfzYel12O2HpawHo0Qe_8GE?usp=sharing"
-    target="_blank"
-    rel="noopener noreferrer"
-    className="bg-blue-600 hover:bg-blue-700 text-white font-semibold p-3 rounded-md w-full block text-center transition-colors"
-  >
-    Upload to Drive
-  </a>
+    <Link
+      to="/file-manager"
+      className="bg-blue-600 hover:bg-blue-700 text-white font-semibold p-3 rounded-md w-full block transition-colors"
+    >
+      Go to Upload Page
+    </Link>
+  </div>
 </div>
 
-        </div>
 
     </div>
   );
