@@ -41,7 +41,7 @@ import CourseEnrollmentAlert from "./pages/courseenrollmentalert";
 
 import { FileManager } from "./pages/FileManager";
 import ScrollToTop from './components/ScrollToTop';
-
+import { Toaster } from 'react-hot-toast';
 
 const FULL_TEXT = "Visit Our Campus Codex";
 
@@ -120,6 +120,7 @@ const App: React.FC = () => {
 
   return (
     <Router>
+       <Toaster position="top-right" reverseOrder={false} /> {/* ✅ Toast setup */}
       <div className="min-h-screen bg-gradient-to-br from-[#1a365d] to-[#0d9488]">
         <Navbar items={navItems} isMenuOpen={isMenuOpen} setIsMenuOpen={setIsMenuOpen} />
         <main className="container mx-auto px-4 pt-10">
