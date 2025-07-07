@@ -69,13 +69,13 @@ const Poster: React.FC = () => {
 
         <div className="text-center space-y-4">
           <div>
-            <h2 className="text-2xl font-bold text-gray-800 mb-2">The Sandeep</h2>
-            <p className="text-gray-600 text-sm">Highest Package of the decade icharu</p>
+            <h2 className="text-2xl font-bold text-gray-800 mb-2">Lingam Venkat Sai</h2>
+            <p className="text-gray-600 text-sm">Saveetha Animutyam </p>
           </div>
 
           <div className="bg-gradient-to-r from-green-400 to-blue-500 text-white py-4 px-6 rounded-2xl shadow-lg">
             <p className="text-sm font-medium opacity-90">CGPA Achieved</p>
-            <p className="text-4xl font-bold">8.92</p>
+            <p className="text-4xl font-bold">9.2</p>
             <p className="text-sm opacity-90">Perfect Score</p>
           </div>
 
@@ -84,7 +84,7 @@ const Poster: React.FC = () => {
               🌟
               <div className="ml-2 text-left">
                 <h3 className="text-lg font-semibold text-gray-800 mb-2">
-                  Congratulations to the MRs Sandeep!
+                  Congratulations to the MRs Venkat Sai!
                 </h3>
                 <p className="text-gray-700 text-sm leading-relaxed">
                   Your exceptional academic performance and dedication have paid off. This perfect CGPA reflects your hard work and commitment to excellence.
