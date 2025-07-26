@@ -2,8 +2,10 @@ import React, { useEffect, useState } from 'react';
 
 const Poster: React.FC = () => {
   const [isClosed, setIsClosed] = useState(false); // Poster is initially open
-  const [showNavigationMessage, setShowNavigationMessage] = useState(false); // State for navigation message
- 
+
+  // State for the subject input (if it's intended to be used elsewhere, otherwise it's unused)
+  const [subject, setSubject] = useState('');
+
   useEffect(() => {
     // Basic entrance animation for the poster
     const poster = document.getElementById('saveetha-hub-poster-modal');
@@ -20,25 +22,17 @@ const Poster: React.FC = () => {
   // Handler for closing the poster
   const handleClose = () => {
     setIsClosed(true);
-    setShowNavigationMessage(false); // Hide message if poster is closed
-    setAssignmentIdeas([]); // Clear ideas on close
-    setSubject(''); // Clear subject on close
-    setError(null); // Clear errors on close
+    // Clear states related to the Gemini API feature on close (these states are not defined in the provided code)
+    // setAssignmentIdeas([]); // This would cause an error as setAssignmentIdeas is not defined
+    setSubject('');
+    // setError(null); // This would cause an error as setError is not defined
   };
 
-  // Handler for the "Go to Upload Hub" button
+  // Handler for the "Go to Upload Hub" button to redirect
   const handleNavigateToHub = () => {
-    // In a real application, you would use a router here (e.g., history.push('/upload-hub'))
-    // For this example, we'll just show a message indicating navigation.
-    setShowNavigationMessage(true);
-    // Optionally close the poster after a short delay or navigate immediately
-    // setTimeout(() => {
-    //   setIsClosed(true);
-    // }, 1500);
+    // Redirect to the /file-manager path
+    window.location.href = '/file-manager';
   };
-
-  // Handler for generating assignment ideas using Gemini API
-  
 
   // If the poster is closed, render nothing
   if (isClosed) return null;
@@ -89,16 +83,6 @@ const Poster: React.FC = () => {
           >
             Go to Upload Hub
           </button>
-
-          {/* Message displayed after clicking the button */}
-          {showNavigationMessage && (
-            <p className="mt-4 text-sm text-green-600 font-medium animate-pulse">
-              Navigating to the Upload Hub... (In a real app, you'd be redirected now!)
-            </p>
-          )}
-
-          {/* Gemini API Feature: Assignment Idea Generator */}
-          
 
           <div className="text-center mt-6 pt-4 border-t border-gray-200 text-xs text-gray-500">
             Empowering Saveetha Students since <span className="font-semibold">2025</span>
