@@ -1,26 +1,12 @@
 import React, { useEffect, useState } from 'react';
 
 const Poster: React.FC = () => {
-  const [isClosed, setIsClosed] = useState(true); // default hidden
-
+  const [isClosed, setIsClosed] = useState(false); // Poster is initially open
+  const [showNavigationMessage, setShowNavigationMessage] = useState(false); // State for navigation message
+ 
   useEffect(() => {
-    // Check if poster was closed within the last 30 minutes
-    const lastClosed = localStorage.getItem('posterClosedAt');
-    const now = new Date().getTime();
-
-    if (!lastClosed || now - parseInt(lastClosed) > 30 * 60 * 1000) {
-      // Show poster if never closed before or it's been more than 30 minutes
-      setIsClosed(false);
-    }
-
-    // Set current date
-    const dateElement = document.getElementById('currentDate');
-    if (dateElement) {
-      dateElement.textContent = new Date().toLocaleDateString();
-    }
-
-    // Entrance animation
-    const poster = document.getElementById('poster');
+    // Basic entrance animation for the poster
+    const poster = document.getElementById('saveetha-hub-poster-modal');
     if (poster) {
       poster.style.transform = 'scale(0.8)';
       poster.style.opacity = '0';
@@ -31,70 +17,91 @@ const Poster: React.FC = () => {
     }
   }, []);
 
+  // Handler for closing the poster
   const handleClose = () => {
     setIsClosed(true);
-    localStorage.setItem('posterClosedAt', new Date().getTime().toString());
+    setShowNavigationMessage(false); // Hide message if poster is closed
+    setAssignmentIdeas([]); // Clear ideas on close
+    setSubject(''); // Clear subject on close
+    setError(null); // Clear errors on close
   };
 
+  // Handler for the "Go to Upload Hub" button
+  const handleNavigateToHub = () => {
+    // In a real application, you would use a router here (e.g., history.push('/upload-hub'))
+    // For this example, we'll just show a message indicating navigation.
+    setShowNavigationMessage(true);
+    // Optionally close the poster after a short delay or navigate immediately
+    // setTimeout(() => {
+    //   setIsClosed(true);
+    // }, 1500);
+  };
+
+  // Handler for generating assignment ideas using Gemini API
+  
+
+  // If the poster is closed, render nothing
   if (isClosed) return null;
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-60 backdrop-blur-sm overflow-auto">
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-60 backdrop-blur-sm overflow-auto p-4 font-sans">
       <div
-        id="poster"
-        className="relative bg-white rounded-3xl p-8 max-w-md w-full z-20 transform transition-all duration-300"
+        id="saveetha-hub-poster-modal"
+        className="relative bg-white rounded-3xl p-8 max-w-lg w-full z-20 transform transition-all duration-300 shadow-xl"
         style={{ boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.25)' }}
       >
+        {/* Close Button */}
         <button
           onClick={handleClose}
-          className="absolute top-4 right-4 w-10 h-10 bg-red-500 hover:bg-red-600 text-white rounded-full flex items-center justify-center shadow-lg"
+          className="absolute top-4 right-4 w-10 h-10 bg-gray-300 hover:bg-gray-400 text-gray-800 rounded-full flex items-center justify-center text-2xl font-bold shadow-md transition-colors duration-200"
+          aria-label="Close poster"
         >
-          ×
+          &times;
         </button>
 
-        {/* ...rest of the poster content... */}
+        {/* Poster Content */}
         <div className="text-center mb-6">
-          <div className="bg-gradient-to-r from-pink-400 to-red-400 text-white px-4 py-2 rounded-full inline-block mb-4">
-            🎉 <span className="font-semibold">CONGRATULATIONS!</span>
+          <div className="bg-gradient-to-r from-blue-500 to-purple-600 text-white px-6 py-3 rounded-full inline-block mb-4 text-lg font-semibold shadow-lg">
+            📚 Welcome to Saveetha Hub! 🚀
           </div>
         </div>
 
         <div className="flex justify-center mb-6">
+          {/* Placeholder image for the hub */}
           <img
-            src="/sandeep.jpg"
-            alt="Student"
+            src="https://placehold.co/128x128/60A5FA/FFFFFF?text=Hub"
+            alt="Saveetha Hub Icon"
             className="w-32 h-32 rounded-full object-cover shadow-lg border-4 border-white"
           />
         </div>
 
         <div className="text-center space-y-4">
-          <div>
-            <h2 className="text-2xl font-bold text-gray-800 mb-2">Lingam Venkat Sai</h2>
-            <p className="text-gray-600 text-sm">Saveetha Animutyam </p>
-          </div>
+          <h2 className="text-3xl font-extrabold text-gray-800 mb-2">Your Study Material Destination</h2>
+          <p className="text-gray-700 text-lg leading-relaxed px-2">
+            Upload and access question papers, assignments, notes, and other study materials for all your Saveetha University subjects.
+            Collaborate and share knowledge with your peers!
+          </p>
 
-          <div className="bg-gradient-to-r from-green-400 to-blue-500 text-white py-4 px-6 rounded-2xl shadow-lg">
-            <p className="text-sm font-medium opacity-90">CGPA Achieved</p>
-            <p className="text-4xl font-bold">9.2</p>
-            <p className="text-sm opacity-90">Perfect Score</p>
-          </div>
+          {/* Navigation Button */}
+          <button
+            onClick={handleNavigateToHub}
+            className="mt-6 bg-green-500 hover:bg-green-600 text-white font-bold py-3 px-8 rounded-full shadow-lg transform hover:scale-105 transition-all duration-300 ease-in-out focus:outline-none focus:ring-4 focus:ring-green-300"
+          >
+            Go to Upload Hub
+          </button>
 
-          <div className="bg-yellow-50 border-l-4 border-yellow-400 p-4 rounded-r-lg">
-            <div className="flex items-start">
-              🌟
-              <div className="ml-2 text-left">
-                <h3 className="text-lg font-semibold text-gray-800 mb-2">
-                  Congratulations to the MRs Venkat Sai!
-                </h3>
-                <p className="text-gray-700 text-sm leading-relaxed">
-                  Your exceptional academic performance and dedication have paid off. This perfect CGPA reflects your hard work and commitment to excellence.
-                </p>
-              </div>
-            </div>
-          </div>
+          {/* Message displayed after clicking the button */}
+          {showNavigationMessage && (
+            <p className="mt-4 text-sm text-green-600 font-medium animate-pulse">
+              Navigating to the Upload Hub... (In a real app, you'd be redirected now!)
+            </p>
+          )}
+
+          {/* Gemini API Feature: Assignment Idea Generator */}
+          
 
           <div className="text-center mt-6 pt-4 border-t border-gray-200 text-xs text-gray-500">
-            📅 Achievement Date: <span id="currentDate"></span>
+            Empowering Saveetha Students since <span className="font-semibold">2025</span>
           </div>
         </div>
       </div>
