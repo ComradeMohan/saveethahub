@@ -23,11 +23,11 @@ const Navbar: React.FC<NavbarProps> = ({ items, isMenuOpen, setIsMenuOpen }) => 
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 55 35" width="45" height="35">
   <defs>
     <linearGradient id="textGradient" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0%" stop-color="#2af598" />
-      <stop offset="100%" stop-color="#009efd" />
+      <stop offset="0%" stopColor="#2af598" />
+      <stop offset="100%" stopColor="#009efd" />
     </linearGradient>
   </defs>
-  <text x="0" y="35" font-size="40" font-family="Arial, sans-serif" font-weight="bold" fill="url(#textGradient)">SH</text>
+  <text x="0" y="35" fontSize="40" fontFamily="Arial, sans-serif" fontWeight="bold" fill="url(#textGradient)">SH</text>
 </svg>
 
 

@@ -37,7 +37,7 @@
   width: 400px;
 }
 .grade_input label,input{
-  font-size: larger;
+  fontsize: larger;
 }
 .cgpa-title{
   margin-bottom: 1rem;

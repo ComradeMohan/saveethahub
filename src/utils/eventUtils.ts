@@ -11,7 +11,7 @@ export const filterEvents = (
   date: Date, 
   filters: FilterOptions
 ): CalendarEvent[] => {
-  console.log('Filters:', filters); // Check filters
+  //console.log('Filters:', filters); // Check filters
   return events.filter(event => {
     // Skip past events
     if (new Date(event.end) < new Date()) return false;
