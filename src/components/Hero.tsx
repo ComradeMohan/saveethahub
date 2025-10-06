@@ -127,7 +127,7 @@ const Hero = () => {
                   onClick={() => setShowTerms(true)}
                   className="px-8 py-3 bg-white/10 hover:bg-white/20 text-white rounded-lg font-medium transition-colors backdrop-blur-sm"
                 >
-                  App server Busy
+                  App is in testing
                 </button>
               </div>
             </div>
