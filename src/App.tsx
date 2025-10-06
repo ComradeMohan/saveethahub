@@ -43,7 +43,7 @@ import { FileManager } from "./pages/FileManager";
 import ScrollToTop from './components/ScrollToTop';
 import { Toaster } from 'react-hot-toast';
 
-const FULL_TEXT = "Visit Our Campus Codex";
+const FULL_TEXT = "Visit Our Official Saveetha Companion";
 
 interface User {
   username: string;
@@ -163,7 +163,7 @@ const App: React.FC = () => {
 
         {/* Promo Button */}
         <a
-          href="https://campus-codex.netlify.app/"
+          href="https://saveethahub.tech/"
           target="_blank"
           rel="noopener noreferrer"
           className={`fixed bottom-4 right-4 bg-[#2e9ed6] text-white rounded-full shadow-lg hover:bg-[#2480b3] transition-all z-50
