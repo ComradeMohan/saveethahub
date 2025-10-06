@@ -58,7 +58,7 @@ const Hero = () => {
   const [showTerms, setShowTerms] = useState(false);
 
   const handleDownload = () => {
-    window.location.href = 'https://github.com/ComradeMohan/saveethahub/releases/download/V5.0/Univault.apk';
+    window.location.href = 'https://play.google.com/store/apps/details?id=com.simats.univault';
   };
 
   const dummyEvents = generateAlternatingEvents(
