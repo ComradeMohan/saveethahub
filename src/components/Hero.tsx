@@ -58,7 +58,7 @@ const Hero = () => {
   const [showTerms, setShowTerms] = useState(false);
 
   const handleDownload = () => {
-    window.location.href = 'https://play.google.com/store/apps/details?id=com.simats.univault';
+    window.location.href = 'https://univault.live/';
   };
 
   const dummyEvents = generateAlternatingEvents(
