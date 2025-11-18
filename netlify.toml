@@ -1,5 +1,12 @@
+# Rule 1: Redirect old Netlify URL to your custom domain (From your snippet)
 [[redirects]]
-  from = "https://saveetha-hub.netlify.app/*"
-  to = "https://app.saveethahub.tech/:splat"
+  from = "https://saveetha-companion.netlify.app/*"
+  to = "https://app.saveethahub.tech/:splat"  # ⚠️ See note below about 'app' subdomain
   status = 301
   force = true
+
+# Rule 2: THE FIX for the "Page Not Found" refresh error (SPA Rewrite)
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
