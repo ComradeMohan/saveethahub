@@ -1,4 +1,5 @@
 [[redirects]]
-  from = "/*"
-  to = "/index.html"
-  status = 200
+  from = "https://saveetha-hub.netlify.app/*"
+  to = "https://app.saveethahub.tech/:splat"
+  status = 301
+  force = true
